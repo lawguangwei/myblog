@@ -1,0 +1,25 @@
+extends ../layout/login_layout
+
+block content
+    div.container-fluid
+        div(id='top-row').row
+           -if(msg)
+              div.col-md-6.col-md-offset-3.alert.alert-danger.alert-dismissable.fade.in
+                 a(data-dismiss='alert').close &times;
+                 p #{msg}
+           h2.col-md-12.text-center.form-title.text-success 用户登录
+           div.form-div.col-md-4.col-md-offset-4
+              form(method='post',action='login').form-horizontal
+                 div.form-group
+                    label.col-md-3.control-label.text-info 用户邮箱:
+                    div.col-md-9
+                       input(type='text',name='email',placeholder='输入用户邮箱').form-control
+                 div.form-group
+                    label.col-md-3.control-label.text-info 用户密码:
+                    div.col-md-9
+                       input(type='password',name='password',placeholder='输入用户密码').form-control
+                 div.form-group
+                    div.col-md-6.col-md-offset-3
+                       a(id='btn-register').btn.btn-default.col-md-12 登录
+
+

@@ -1,0 +1,13 @@
+.form-div{
+    border: 2px solid #999;
+    padding: 18px 28px 0px 28px;
+}
+
+#top-row{
+    margin-top:120px;
+}
+
+.form-title{
+    text-shadow: 3px 3px 3px #999;
+    font-weight: 800;
+}
