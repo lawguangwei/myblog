@@ -1,9 +1,11 @@
 var express = require('express');
+var router = express.Router();
+
 var User = require('../models/User');
 var crypto = require('crypto');
 var UserFilter = require('../filter/UserFilter');
 
-var router = express.Router();
+
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/myblog');
 var db = mongoose.connection;
