@@ -16,10 +16,17 @@ db.once('open', function (msg) {
 
 
 /* GET users listing. */
-router.get('/',UserFilter.checkLogin, function(req, res) {
-    res.send(req.session.user);
+/**
+ * 用户主页
+ */
+router.get('/',UserFilter.checkLogin, function(req, res,next) {
+    var user = req.session.user;
+    res.render('user/user_index',{title:'用户主页',user:user});
 });
 
+/**
+ * 用户登录路由
+ */
 router.get('/login', function(req, res) {
     res.render('user/user_login',{title:'用户登录'});
 });
@@ -47,10 +54,13 @@ router.post('/login',function(req,res){
     });
 });
 
+
+/**
+ * 用户注册路由
+ */
 router.get('/register', function(req, res) {
     res.render('user/user_register',{title:'用户注册'});
 });
-
 router.post('/register',UserFilter.checkRegister,function(req,res){
     var email = req.body.email;
     var name = req.body.name;

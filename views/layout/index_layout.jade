@@ -1,0 +1,38 @@
+doctype html
+html
+   head
+      title= title
+      link(rel='stylesheet',href='/bootstrap/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/stylesheets/index.css')
+      script(type='text/javascript',src='/javascripts/jquery-2.2.0.min.js')
+      script(type='text/javascript',src='/bootstrap/js/bootstrap.min.js')
+      script(type='text/javascript',src='/javascripts/index.js')
+   body
+      div(id='content-pane')
+         nav.navbar.navbar-inverse
+            div.container-fluid
+               div.navbar-header
+                  button(type='button',data-toggle='collapse',data-target='#navbar',aria-expanded='false').navbar-toggle.collapsed
+                     span.sr-only Toggle navigation
+                     span.icon-bar
+                     span.icon-bar
+                     span.icon-bar
+                  a(href='#').navbar-brand Brand
+               div(id='navbar').collapse.navbar-collapse
+                  form(role='search').navbar-form.navbar-left
+                     div.form-group
+                        input(type='text',placeholder='博主名').form-control
+                        button(type='submit').btn.btn-default 找人
+                  ul.nav.navbar-nav.navbar-right
+                     li.dropdown
+                        a(href='#',data-toggle='dropdown',role='button',aria-haspopup='true',aria-expaned='false').dropdown-toggle #{user.name}
+                           span.caret
+                        ul.dropdown-menu
+                           li
+                              a(href='#') 个人资料
+                           li
+                              a(href='#') 其它设置
+                           li(role='separator').divider
+                           li
+                              a(href='#') 退出
+         block content

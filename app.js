@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(session({
   secret:'12345',
   name: 'myblog',
-  cookie:{maxAge:80000},
+  cookie:{maxAge:800000},
   resave:false,
   saveUninitialized:true,
 }));

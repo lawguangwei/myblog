@@ -33,9 +33,10 @@ var UserFiler = {
             }
         }
     },
+
     checkLogin:function(req,res,next){
-        if(req.session.user == ''){
-            res.render('user/user_login',{title:'用户登录'});
+        if(req.session.user == '' || typeof (req.session.user) == 'undefined'){
+            res.redirect('/users/login');
         }else{
             next();
         }
