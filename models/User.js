@@ -18,4 +18,5 @@ User.register = function(email,name,password,req,res){
     });
 }
 
+
 module.exports = User;

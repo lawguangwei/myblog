@@ -1,0 +1,37 @@
+extends ../layout/index_layout
+
+block content
+    div(id='content-pane')
+        img(id='old-img',src=params.image)
+        div(id='person-info')
+            ul
+                li
+                    h1
+                        a(href='/users').text-success=params.user.name
+                        span 的博客
+                li
+                    h3
+                        span.text-info 邮箱:
+                        span=params.user.email
+                li
+                    h3
+                        span.text-info 用户名:
+                        span=params.user.name
+        h1 头像设置
+        div(id='div-img')
+            div(id='person-img').container
+                div.imageBox
+                    div.thumbBox
+                    div.action
+                        div.new-contentarea.tc
+                            a(href='javascript:void(0)').upload-img
+                                label(for='upload-file') 上传图像
+                            form(id='form-img',enctype='multipart/form-data',method='post')
+                                input(id='upload-file',type='file',name='file')
+                        input(type='button',value='裁剪',id='btnCrop').Btnsty_peyton
+                        input(type='button',value='+',id='btnZoomIn').Btnsty_peyton
+                        input(type='button',value='-',id='btnZoomOut').Btnsty_peyton
+                div.cropped
+                div(id='div-upload-btn')
+                    button(id='upload-btn').btn.btn-default 确定
+

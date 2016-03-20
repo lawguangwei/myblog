@@ -3,10 +3,12 @@ html
    head
       title= title
       link(rel='stylesheet',href='/bootstrap/css/bootstrap.min.css')
-      link(rel='stylesheet', href='/stylesheets/index.css')
+      -for(var i=0;i<params.asset.css.length;i++)
+        link(rel='stylesheet', href='/stylesheets/'+params.asset.css[i]+'.css')
       script(type='text/javascript',src='/javascripts/jquery-2.2.0.min.js')
       script(type='text/javascript',src='/bootstrap/js/bootstrap.min.js')
-      script(type='text/javascript',src='/javascripts/index.js')
+      -for(var i=0;i<params.asset.js.length;i++)
+        script(type='text/javascript',src='/javascripts/'+params.asset.js[i]+'.js')
    body
       div(id='content-pane')
          nav.navbar.navbar-inverse
@@ -17,7 +19,7 @@ html
                      span.icon-bar
                      span.icon-bar
                      span.icon-bar
-                  a(href='#').navbar-brand Brand
+                  a(href='#').navbar-brand NoBlog
                div(id='navbar').collapse.navbar-collapse
                   form(role='search').navbar-form.navbar-left
                      div.form-group
@@ -25,14 +27,14 @@ html
                         button(type='submit').btn.btn-default 找人
                   ul.nav.navbar-nav.navbar-right
                      li.dropdown
-                        a(href='#',data-toggle='dropdown',role='button',aria-haspopup='true',aria-expaned='false').dropdown-toggle #{user.name}
+                        a(href='#',data-toggle='dropdown',role='button',aria-haspopup='true',aria-expaned='false').dropdown-toggle #{params.user.name}
                            span.caret
                         ul.dropdown-menu
                            li
-                              a(href='#') 个人资料
+                              a(href='/users/info') 个人资料
                            li
-                              a(href='#') 其它设置
+                              a(href='#') 写博文
                            li(role='separator').divider
                            li
-                              a(href='#') 退出
+                              a(href='/users/logout') 退出
          block content

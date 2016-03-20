@@ -9,13 +9,13 @@ var UserSchemas = new mongoose.Schema({
     password:String,
     gender:String,
     birthDay:{type:Date,default:Date.now},
-    personInfo:String
+    personInfo:String,
 });
 
 UserSchemas.statics = {
     findByEmail:function(email,cb){
         return this.findOne({email:email}).exec(cb);
-    }
+    },
 };
 
 

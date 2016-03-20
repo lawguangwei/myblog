@@ -35,7 +35,7 @@ var UserFiler = {
     },
 
     checkLogin:function(req,res,next){
-        if(req.session.user == '' || typeof (req.session.user) == 'undefined'){
+        if(!req.session.user){
             res.redirect('/users/login');
         }else{
             next();
