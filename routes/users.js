@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var fs = require('fs');
-
 var User = require('../models/User');
 var PersonImg = require('../models/PersonImg');
 
@@ -51,7 +49,6 @@ router.get('/',UserFilter.checkLogin, function(req, res,next) {
         res.render('user/user_index',{title:'用户主页',params:params});
     });
 });
-
 
 /**
  * 用户登录路由
@@ -108,8 +105,10 @@ router.post('/register',UserFilter.checkRegister,function(req,res){
     User.register(email,name,password,req,res);
 });
 
+
 router.get('/info',UserFilter.checkLogin,function(req,res,next){
     var user = req.session.user;
+
     PersonImg.findOne({email:user.email},function(err,img){
         var image = '/images/person-img.png';
         if(!err){
@@ -127,7 +126,10 @@ router.get('/info',UserFilter.checkLogin,function(req,res,next){
         }
         res.render('user/user_info',{title:'用户信息',params:params});
     });
+
+
 });
+
 
 /**
 router.post('/setImg',UserFilter.checkLogin,multipartMiddleware,function(req,res,next){
@@ -155,14 +157,13 @@ router.post('/setImg',UserFilter.checkLogin,multipartMiddleware,function(req,res
 });
  */
 router.post('/setImg',UserFilter.checkLogin,function(req,res,next){
-
     var email = req.session.user.email;
     var img = req.body.img;
     PersonImg.update({email:email},{$set:{imgSrc:img}},{upsert:true},function(err){
         if(err){
-            res.json({'result':'1',err:err});
+            res.json({'code':'1',err:err});
         }else{
-            res.json({'result':'0',img:img});
+            res.json({'code':'0',img:img});
         }
     });
 });
@@ -173,6 +174,75 @@ router.get('/checkImg',function(rep,res,next){
         _id: '56ed765853a0dcf89bb7320f'
     });
     readstream.pipe(res);
+});
+
+router.post('/setBaseInfo',UserFilter.checkLogin,function(req,res,next){
+    var email = req.session.user.email;
+    var name = req.body.name;
+    var gender = req.body.gender;
+    var birthday =req.body.birthday;
+    var marriage = req.body.marriage;
+    User.update({email:email},{$set:{name:name,gender:gender,birthday:birthday,marriage:marriage}},{upsert:true},function(err){
+        if(err){
+            console.log(err);
+            res.json({code:'1'});
+        }else{
+            User.findOne({email:email},function(err,user){
+               if(err){
+                   console.log(err);
+                   res.json({code:'1'});
+               }else{
+                   req.session.user = user;
+                   res.json({code:'0'});
+               }
+            });
+        }
+    });
+});
+
+router.post('/setExperience',UserFilter.checkLogin,function(req,res,next){
+    var email = req.session.user.email;
+    var college = req.body.college;
+    var high = req.body.high;
+    var middle =req.body.middle;
+    var company = req.body.company;
+    User.update({email:email},{$set:{experience:{college:college,high:high,middle:middle,company:company}}},{upsert:true},function(err){
+        if(err){
+            console.log(err);
+            res.json({code:'1'});
+        }else{
+            User.findOne({email:email},function(err,user){
+                if(err){
+                    console.log(err);
+                    res.json({code:'1'});
+                }else{
+                    req.session.user = user;
+                    res.json({code:'0'});
+                }
+            });
+        }
+    });
+});
+
+router.post('/setPersonInfo',UserFilter.checkLogin,function(req,res,next){
+    var email = req.session.user.email;
+    var info = req.body.info;
+    User.update({email:email},{$set:{personInfo:info}},{upsert:true},function(err){
+        if(err){
+            console.log(err);
+            res.json({code:'1'});
+        }else{
+            User.findOne({email:email},function(err,user){
+                if(err){
+                    console.log(err);
+                    res.json({code:'1'});
+                }else{
+                    req.session.user = user;
+                    res.json({code:'0'});
+                }
+            });
+        }
+    });
 });
 
 

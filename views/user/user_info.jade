@@ -3,7 +3,7 @@ extends ../layout/index_layout
 block content
     div(id='content-pane')
         img(id='old-img',src=params.image)
-        div(id='person-info')
+        div(id='person-info').content-div
             ul
                 li
                     h1
@@ -18,7 +18,7 @@ block content
                         span.text-info 用户名:
                         span=params.user.name
         h1 头像设置
-        div(id='div-img')
+        div(id='div-img').content-div
             div(id='person-img').container
                 div.imageBox
                     div.thumbBox
@@ -34,4 +34,104 @@ block content
                 div.cropped
                 div(id='div-upload-btn')
                     button(id='upload-btn').btn.btn-default 确定
+        h1 基本信息
+        div(id='div-base').content-div
+            form.form-horizontal
+                div.form-group
+                    label.col-md-3.control-label.text-info 用户名:
+                    div.col-md-6
+                        input(id='user-name',type='text',value=params.user.name).form-control
+                div.form-group
+                    label.col-md-3.control-label.text-info 性别:
+                    div.col-md-6
+                        label.radio-inline
+                            -if(params.user.gender == '男')
+                                input(type='radio',name='gender',id='gender-male',value='男',checked)
+                                span 男
+                            -else
+                                input(type='radio',name='gender',id='gender-male',value='男')
+                                span 男
+                        label.radio-inline
+                            -if(params.user.gender == '女')
+                                input(type='radio',name='gender',id='gender-female',value='女',checked)
+                                span 女
+                            -else
+                                input(type='radio',name='gender',id='gender-female',value='女')
+                                span 女
+                div.form-group
+                    label.col-md-3.control-label.text-info 生日
+                    div.col-md-3
+                        input(id='birthday',type='date',name='birthday',value=params.user.birthday).form-control
+                div.form-group
+                    label.col-md-3.control-label.text-info 婚姻
+                    div.col-md-3
+                        select(id='marriage',name='marriage').form-control
+                            -if(params.user.marriage == '单身')
+                                option(selected) 单身
+                            -else
+                                option 单身
+                            -if(params.user.marriage == '已婚')
+                                option(selected) 已婚
+                            -else
+                                option 已婚
+                            -if(params.user.marriage == '恋爱中')
+                                option(selected) 恋爱中
+                            -else
+                                option 恋爱中
+                div.form-group
+                    div.col-md-3.col-md-offset-3
+                        a(id='btn-set-base').btn.btn-primary.col-md-12 确定
+        h1 个人经历
+        div(id='div-experience').content-div
+            form.form-horizontal
+                div.form-group
+                    label.col-md-3.control-label
+                        h3.text-success 学校
+                div.form-group
+                    label.col-md-3.control-label.text-info 大学
+                    div.col-md-6
+                        -if(params.user.experience)
+                            input(id='college',type='text',value=params.user.experience.college).form-control
+                        -else
+                            input(id='college',type='text').form-control
+                div.form-group
+                    label.col-md-3.control-label.text-info 高中
+                    div.col-md-6
+                        -if(params.user.experience)
+                            input(id='high-school',type='text',value=params.user.experience.high).form-control
+                        -else
+                            input(id='high-school',type='text').form-control
+                div.form-group
+                    label.col-md-3.control-label.text-info 初中
+                    div.col-md-6
+                        -if(params.user.experience)
+                            input(id='middle-school',type='text',value=params.user.experience.middle).form-control
+                        -else
+                            input(id='middle-school',type='text').form-control
+                div.form-group
+                    label.col-md-3.control-label
+                        h3.text-success 工作
+                div.form-group
+                    label.col-md-3.control-label.text-info 公司
+                    div.col-md-6
+                        -if(params.user.experience)
+                            input(id='company',type='text',value=params.user.experience.company).form-control
+                        -else
+                            input(id='company',type='text').form-control
+                div.form-group
+                    div.col-md-3.col-md-offset-3
+                        a(id='btn-set-experience').btn.btn-primary.col-md-12 确定
+        h1 个人简介
+        div(id='div-info')
+            form
+                label
+                    h3.text-success 个人简介
+                textarea(id='text-person-info').form-control #{params.user.personInfo}
+            br
+            a(id='btn-set-info').btn.btn-primary 确定
+
+
+
+
+
 

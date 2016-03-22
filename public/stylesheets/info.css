@@ -133,7 +133,7 @@ body{
 }
 
 #div-img{
-    background: #e7e7e7;
+    background: #ffffff;
 }
 
 #old-img{
@@ -159,4 +159,28 @@ ul{
 
 a{
     cursor: pointer;
+}
+
+#div-base{
+    background: #ffffff;
+    border: 2px solid #000000;
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    padding: 20px 20px 20px 20px;
+}
+
+#div-experience{
+    background: #ffffff;
+    border: 2px solid #000000;
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    padding: 20px 20px 20px 20px;
+}
+
+#div-info{
+    background: #ffffff;
+    border: 2px solid #000000;
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    padding: 20px 20px 20px 20px;
 }

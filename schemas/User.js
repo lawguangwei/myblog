@@ -7,9 +7,16 @@ var UserSchemas = new mongoose.Schema({
     email:String,
     name:String,
     password:String,
-    gender:String,
-    birthDay:{type:Date,default:Date.now},
-    personInfo:String,
+    gender:{type:String,default:'男'},
+    birthday:{type:String},
+    experience:{
+        college:String,
+        high:String,
+        middle:String,
+        company:String,
+    },
+    marriage:{type:String,default:'单身'},
+    personInfo:String
 });
 
 UserSchemas.statics = {

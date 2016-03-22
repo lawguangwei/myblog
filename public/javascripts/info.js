@@ -3,6 +3,29 @@
  */
 $(function(){
     setImg();
+    $('#btn-set-base').on('click',function(){
+        var name;
+        if($('#user-name').val()){
+            name = $('#user-name').val();
+        }
+        var gender = $(':radio[name="gender"]:checked').val();
+        var birthday = $('#birthday').val();
+        var marriage = $('#marriage').val();
+
+        setBaseInfo(name,gender,birthday,marriage);
+    });
+
+    $('#btn-set-experience').on('click',function(){
+        var college = $('#college').val();
+        var high = $('#high-school').val();
+        var middle = $('#middle-school').val();
+        var company = $('#company').val();
+        setExperience(college,high,middle,company);
+    });
+
+    $('#btn-set-info').on('click',function(){
+        setPersonInfo(info);
+    });
 })
 
 
@@ -16,13 +39,11 @@ function uploadImg(data){
             alert('网络错误');
         },
         success:function(result){
-            $('#old-img').attr('src',result['img']);
+            if(result['code'] == '0'){
+                $('#old-img').attr('src',result['img']);
+            }
         },
     });
-}
-
-function progressHandlingFunction(){
-
 }
 
 function setImg(){
@@ -61,6 +82,59 @@ function setImg(){
             alert('请选择图像');
         }else{
             uploadImg(img);
+        }
+    });
+}
+
+function setBaseInfo(name,gender,birthday,marriage){
+    $.ajax({
+        url:'/users/setBaseInfo',
+        type:'post',
+        data:{name:name,gender:gender,birthday:birthday,marriage:marriage},
+        dataType:'json',
+        success:function(result){
+            if(result['code'] == '0'){
+                alert('基本信息修改成功!');
+                location.reload();
+            }else{
+                alert('修改失败!');
+            }
+        }
+    });
+}
+
+
+function setExperience(college,high,middle,company){
+    $.ajax({
+        url:'/users/setExperience',
+        type:'post',
+        data:{college:college,high:high,middle:middle,company:company},
+        dataType:'json',
+        success:function(result){
+            if(result['code'] == '0'){
+                alert('记录修改成功!');
+                location.reload();
+            }else{
+                alert('修改失败!');
+            }
+        }
+    });
+}
+
+
+function setPersonInfo(info){
+    $.ajax({
+        url:'/users/setPersonInfo',
+        type:'post',
+        data:{info:info},
+        dataType:'json',
+        success:function(result){
+            if(result['code'] == '0'){
+                alert('个人信息修改成功!');
+                location.reload();
+            }else{
+                alert('修改失败!');
+            }
         }
     });
 }
