@@ -1,0 +1,56 @@
+body{
+    background: url("../images/cloud.jpg");
+}
+
+ul{
+    list-style: none;
+    padding:0;
+}
+
+#catalog ul{
+    padding: 18px 8px 18px 8px;
+}
+
+a{
+    cursor: pointer;
+}
+
+#content-pane{
+    width: 1000px;
+    margin: 0 auto 0 auto;
+}
+
+#catalog{
+    width: 200px;
+    border: 2px solid #000;
+    background: #ffffff;
+    float: left;
+}
+
+#blog-list{
+    width: 780px;
+    border: 2px solid #000;
+    background: #ffffff;
+    margin-left: 20px;
+    float: left;
+    padding: 20px 20px 20px 20px;
+}
+
+
+
+.li-line{
+    height: 2px;
+    background: #000000;
+}
+#info-nav ul{
+    height: 30px;
+}
+
+#info-nav ul li{
+    width: 80px;
+    height:20px;
+    margin-top: 5px;
+    float: left;
+    text-align: center;
+    border-right: 2px solid #000;
+}

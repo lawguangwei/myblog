@@ -1,0 +1,22 @@
+body{
+    background: url("../images/cloud.jpg");
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    cursor: pointer;
+}
+
+#content-pane{
+    width: 1000px;
+    margin: 0 auto 0 auto;
+}
+
+#write-pane{
+    background: #fff;
+    padding: 20px 20px 20px 20px;
+    border: 2px solid #000;
+}

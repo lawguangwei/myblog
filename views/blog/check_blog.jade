@@ -1,0 +1,21 @@
+extends ../layout/index_layout
+block content
+    div(id='content-pane')
+        div(id='blog-div')
+            a(href='/blog')
+                p 反回
+            h3.text-info #{params.blog.title}
+            div.li-line
+            -var date = new Date(params.blog.createDate);
+            p 创建时间 :&nbsp;
+                span.text-warning #{date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+":"+date.getSeconds()}
+            div!=params.blog.content
+
+
+
+
+
+
+
+
+

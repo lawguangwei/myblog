@@ -40,8 +40,8 @@ router.get('/',UserFilter.checkLogin, function(req, res,next) {
         }
         var params = {
             asset: {
-                js:['index'],
-                css:['index']
+                js:['/javascripts/index.js'],
+                css:['/stylesheets/index.css']
             },
             user:req.session.user,
             image:image
@@ -56,6 +56,7 @@ router.get('/',UserFilter.checkLogin, function(req, res,next) {
 router.get('/login', function(req, res) {
     res.render('user/user_login',{title:'用户登录'});
 });
+
 router.post('/login',function(req,res){
     var email = req.body.email;
     var password = req.body.password;
@@ -118,8 +119,8 @@ router.get('/info',UserFilter.checkLogin,function(req,res,next){
         }
         var params = {
             asset: {
-                js:['info','cropbox'],
-                css:['info']
+                js:['/javascripts/info.js','/javascripts/cropbox.js'],
+                css:['/stylesheets/info.css']
             },
             user:req.session.user,
             image:image

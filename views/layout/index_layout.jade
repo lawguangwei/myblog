@@ -4,11 +4,11 @@ html
       title= title
       link(rel='stylesheet',href='/bootstrap/css/bootstrap.min.css')
       -for(var i=0;i<params.asset.css.length;i++)
-        link(rel='stylesheet', href='/stylesheets/'+params.asset.css[i]+'.css')
+        link(rel='stylesheet', href=params.asset.css[i])
       script(type='text/javascript',src='/javascripts/jquery-2.2.0.min.js')
       script(type='text/javascript',src='/bootstrap/js/bootstrap.min.js')
       -for(var i=0;i<params.asset.js.length;i++)
-        script(type='text/javascript',src='/javascripts/'+params.asset.js[i]+'.js')
+        script(type='text/javascript',src=params.asset.js[i])
    body
       div(id='content-pane')
          nav.navbar.navbar-inverse
@@ -33,7 +33,7 @@ html
                            li
                               a(href='/users/info') 个人资料
                            li
-                              a(href='#') 写博文
+                              a(href='/blog/write') 写博文
                            li(role='separator').divider
                            li
                               a(href='/users/logout') 退出
