@@ -7,16 +7,20 @@ block content
             ul
                 li
                     h1
-                        a(href='/users').text-success=params.user.name
+                        a(href='/users/'+params.user._id+'/index').text-success=params.user.name
                         span 的博客
                 li
-                    h3
+                    h4
                         span.text-info 邮箱:
                         span=params.user.email
                 li
-                    h3
+                    h4
                         span.text-info 用户名:
                         span=params.user.name
+                li
+                    h4
+                        span.text-info 个人简介:
+                        span(style='font-size:14px;')=params.user.personInfo
         h1 头像设置
         div(id='div-img').content-div
             div(id='person-img').container

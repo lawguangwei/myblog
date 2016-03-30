@@ -24,38 +24,42 @@ conn.once('open', function (msg) {
 });
 
 
-
-/* GET users listing. */
-/**
- * 用户主页
- */
-router.get('/',UserFilter.checkLogin, function(req, res,next) {
-    var user = req.session.user;
-    PersonImg.findOne({email:user.email},function(err,img){
-        var image = '/images/person-img.png';
-        if(!err){
-            if(img){
-                image = img.imgSrc;
-            }
+router.get('/:id/index',UserFilter.checkLogin, function(req, res,next) {
+    var userId = req.params.id;
+    User.findOne({_id:userId},function(err,user){
+        if(err){
+            console.log('error');
+            res.send('500 Eorror');
+        }else{
+            PersonImg.findOne({email:user.email},function(err,img){
+                var image = '/images/person-img.png';
+                if(!err){
+                    if(img){
+                        image = img.imgSrc;
+                    }
+                }
+                var params = {
+                    asset: {
+                        js:['/javascripts/index.js'],
+                        css:['/stylesheets/index.css']
+                    },
+                    user:req.session.user,
+                    image:image
+                }
+                res.render('user/user_index',{title:'用户主页',params:params});
+            });
         }
-        var params = {
-            asset: {
-                js:['/javascripts/index.js'],
-                css:['/stylesheets/index.css']
-            },
-            user:req.session.user,
-            image:image
-        }
-        res.render('user/user_index',{title:'用户主页',params:params});
     });
 });
 
+/* GET users listing. */
 /**
  * 用户登录路由
  */
-router.get('/login', function(req, res) {
+router.get('/login',function(req, res) {
     res.render('user/user_login',{title:'用户登录'});
 });
+
 
 router.post('/login',function(req,res){
     var email = req.body.email;
@@ -72,7 +76,7 @@ router.post('/login',function(req,res){
            }else{
                if(user.password == password){
                    req.session.user = user;
-                   res.redirect('/users');
+                   res.redirect('/users/'+user._id+'/index');
                }else{
                    res.render('user/user_login',{title:'用户登录',msg:'密码错误'});
                }
@@ -88,7 +92,7 @@ router.get('/logout',function(req,res,next){
     if(req.session.user){
         req.session.destroy();
     }
-    res.redirect('/users');
+    res.redirect('/');
 });
 /**
  * 用户注册路由
@@ -96,6 +100,7 @@ router.get('/logout',function(req,res,next){
 router.get('/register', function(req, res) {
     res.render('user/user_register',{title:'用户注册'});
 });
+
 router.post('/register',UserFilter.checkRegister,function(req,res){
     var email = req.body.email;
     var name = req.body.name;

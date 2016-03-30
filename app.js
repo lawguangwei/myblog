@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(session({
   secret:'12345',
   name: 'myblog',
-  cookie:{maxAge:800000},
+  cookie:{maxAge:8000000},
   resave:false,
   saveUninitialized:true,
 }));
@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/blog',blog);
+app.use('/users/:id/blog',blog);
 app.use('/ueditor/ue',ueditor({//这里的/ueditor/ue是因为文件件重命名为了ueditor,如果没改名，那么应该是/ueditor版本号/ue
     configFile: '/ueditor/php/config.json',//如果下载的是jsp的，就填写/ueditor/jsp/config.json
     mode: 'local', //本地存储填写local

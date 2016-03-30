@@ -27,14 +27,17 @@ html
                         button(type='submit').btn.btn-default 找人
                   ul.nav.navbar-nav.navbar-right
                      li.dropdown
-                        a(href='#',data-toggle='dropdown',role='button',aria-haspopup='true',aria-expaned='false').dropdown-toggle #{params.user.name}
-                           span.caret
-                        ul.dropdown-menu
-                           li
-                              a(href='/users/info') 个人资料
-                           li
-                              a(href='/blog/write') 写博文
-                           li(role='separator').divider
-                           li
-                              a(href='/users/logout') 退出
+                        -if(!params.user)
+                            a(href='/users/login',role='button') 登录
+                        -else
+                            a(href='#',data-toggle='dropdown',role='button',aria-haspopup='true',aria-expaned='false').dropdown-toggle #{params.user.name}
+                               span.caret
+                            ul.dropdown-menu
+                               li
+                                  a(href='/users/info') 个人资料
+                               li
+                                  a(href='/users/'+params.user._id+'/blog/write') 写博文
+                               li(role='separator').divider
+                               li
+                                  a(href='/users/logout') 退出
          block content

@@ -5,6 +5,4 @@ $(function(){
     $('#btn-register').on('click',function(){
         $('form').submit();
     });
-
-
 })

@@ -2,6 +2,8 @@
  * Created by luoguangwei on 16/3/18.
  */
 var User = require('../models/User');
+var Blog = require('../models/Blog');
+
 var UserFiler = {
     checkRegister:function(req,res,next){
         var email = req.body.email;
@@ -40,7 +42,26 @@ var UserFiler = {
         }else{
             next();
         }
+    },
+
+    isMe:function(req,res,next){
+        var userId = getUserId(req.baseUrl);
+        if(!req.session.user){
+            next('route');
+        }else{
+            if(userId == req.session.user._id){
+                next();
+            }else{
+                next('route');
+            }
+        }
     }
+}
+
+function getUserId(path){
+    var paths = path.split('/');
+    console.log(paths);
+    return paths[2];
 }
 
 module.exports = UserFiler;

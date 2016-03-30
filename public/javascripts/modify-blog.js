@@ -1,41 +1,32 @@
 $(function(){
     var ue = UE.getEditor('container');
-    setCollection();
     $('#commit-btn').on('click',function(){
-        var userId = $(this).attr('user-id');
         var title = $('#title').val();
         var content = ue.getContent();
         var collection = $('#collection').val();
         var type = $(':radio[name="type"]:checked').val();
-
+        var id = $(this).attr('blog-id');
+        var userId = $(this).attr('user-id');
         if(title == ''){
             alert('请完成标题');
         }else{
-            writeBlog(title,content,collection,type,userId);
+            modifyBlog(title,content,collection,type,id,userId);
         }
     });
+    setCollection($('#collection').attr('blog-collection'));
+});
 
-    $('#collect-commit').on('click',function(){
-        var name = $('#input-collect-name').val();
-        var type = $(':radio[name="collect-type"]:checked').val();
-        if(name == ''){
-            alert('请完成标题');
-        }else{
-            createCollect(name,type);
-        }
-    });
-})
 
-function writeBlog(title,content,collection,type,userId){
+function modifyBlog(title,content,collection,type,blogId,userId){
     $.ajax({
         type:'post',
-        url:'write',
-        data:{title:title,content:content,collection:collection,type:type},
+        url:'/users/'+userId+'/blog/modify',
+        data:{title:title,content:content,collection:collection,type:type,blogId:blogId},
         dataType:'json',
         success:function(result){
             if(result['code'] == '0'){
                 alert('博文已保存!');
-                location.href = '/users/'+userId+'/blog';
+                location.href='/users/'+userId+'/blog/check/'+result['blogId'];
             }else{
                 alert('博文保存失败');
             }
@@ -60,17 +51,21 @@ function createCollect(name,type){
     });
 }
 
-function setCollection(){
+function setCollection(blogCollection){
     $.ajax({
         type:'get',
-        url:'getCollect',
+        url:'/users/:id/blog/getCollect',
         data:{},
         dataType:'json',
         success:function(result){
             if(result['code'] == '0'){
                 var collections = result['collections'];
                 collections.forEach(function(collection){
-                    var content = '<option class="option-append" value="'+collection._id+'">'+collection.collectionName+'</option>';
+                    if(collection._id == blogCollection){
+                        var content = '<option class="option-append" value="'+collection._id+'" selected>'+collection.collectionName+'</option>';
+                    }else{
+                        var content = '<option class="option-append" value="'+collection._id+'">'+collection.collectionName+'</option>';
+                    }
                     $('#collection').append(content);
                 });
             }

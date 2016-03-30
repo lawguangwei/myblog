@@ -24,6 +24,7 @@ $(function(){
     });
 
     $('#btn-set-info').on('click',function(){
+        var info = $('#text-person-info').val();
         setPersonInfo(info);
     });
 })

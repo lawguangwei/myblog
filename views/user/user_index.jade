@@ -45,7 +45,7 @@ block content
             li
                a 首页
             li
-               a(href='/blog') 博文
+               a(href='blog') 博文
             li
                a 相册
             li
@@ -70,7 +70,7 @@ block content
             div.col-md-3.album-div
                div.photo-album.col-md-12
                   a
-                     img(src='images/test-img1.jpg').img-album
+                     img(src='/images/test-img1.jpg').img-album
                p 相册名:&nbsp;
                   span.text-info 相册
                p 创建时间:&nbsp;
@@ -79,7 +79,7 @@ block content
       div(id='video-pane').container-fluid
          -for(var i=1;i<=6;i++)
             div.col-md-4.video-div
-               img(src='images/test-img1.jpg').video-img.col-md-12
+               img(src='/images/test-img1.jpg').video-img.col-md-12
                p 视频:&nbsp;
                   span.text-info 视频
                p 创建时间:&nbsp;

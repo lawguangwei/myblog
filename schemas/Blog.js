@@ -9,5 +9,4 @@ var BlogSchemas = new mongoose.Schema({
     createDate:{type:Date,default:Date.now()},
 });
 
-
 module.exports = BlogSchemas;

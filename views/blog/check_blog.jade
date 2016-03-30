@@ -2,13 +2,15 @@ extends ../layout/index_layout
 block content
     div(id='content-pane')
         div(id='blog-div')
-            a(href='/blog')
-                p 反回
+            a(href='/users/'+params.ownerId+'/blog')
+                p 返回
             h3.text-info #{params.blog.title}
             div.li-line
             -var date = new Date(params.blog.createDate);
             p 创建时间 :&nbsp;
-                span.text-warning #{date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+":"+date.getSeconds()}
+                span.text-warning #{date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+":"+date.getSeconds()}&nbsp;
+                -if(params.isMe)
+                    a(href='/users/'+params.user._id+'/blog/modify/'+params.blog._id)  [编辑]
             div!=params.blog.content
 
 

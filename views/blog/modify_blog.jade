@@ -1,0 +1,61 @@
+extends  ../layout/index_layout
+block content
+    block content
+        div(id='content-pane')
+            h1.text-info 修改博文
+            div(id='write-pane')
+                a(href='/users/'+params.user._id+'/blog') 返回
+                h3.text-success 标题
+                input(id='title',type='text',value=params.blog.title).form-control
+                h3.text-success 内容
+                script(id='container',name='content',type='text/plain')
+                    div!=params.blog.content
+                h3.text-success 分类
+                    a(id='a-create-collect',style='font-size:5px',data-toggle='modal',data-target='#create-collect') 创建分类
+                select(id='collection',style='width:300px',blog-collection=params.blog.Collection).form-control
+                    -if(params.blog.collection == '默认')
+                        option(selected) 默认
+                    -else
+                        option 默认
+                -if(params.blog.type == 'public')
+                    label.radio-inline
+                        input(type='radio',name='type',id='type-public',value='public',checked)
+                        span 公开
+                    label.radio-inline
+                        input(type='radio',name='type',id='type-private',value='private')
+                        span 私人
+                -else
+                    label.radio-inline
+                        input(type='radio',name='type',id='type-public',value='public')
+                        span 公开
+                    label.radio-inline
+                        input(type='radio',name='type',id='type-private',value='private',checked)
+                        span 私人
+                h3
+                    button(id='commit-btn',style='width:200px',blog-id=params.blog._id,user-id=params.user._id).btn.btn-primary 保存
+
+        div(id='create-collect',tabindex='-1',role='dialog',aria-labelledby='collectLabel').modal.fade
+            div(role='document').modal-dialog
+                div.modal-content
+                    div.modal-header
+                        button(type='button',data-dismiss='modal',aria-label='Close').close
+                            span(aria-hidden='true') &times;
+                        h4(id='collectLabel').modal-title 创建博文集
+                    div.modal-body
+                        div.container-fluid
+                            form.form-horizontal
+                                div.form-group
+                                    label.col-md-3.control-label 博文集名称:
+                                    div.col-md-7
+                                        input(id='input-collect-name',type='text').form-control
+                                div.form-group
+                                    div.col-md-offset-3
+                                        label.radio-inline
+                                            input(type='radio',name='collect-type',id='type-public',value='public',checked)
+                                            span 公开
+                                        label.radio-inline
+                                            input(type='radio',name='collect-type',id='type-private',value='private')
+                                            span 私人
+                    div.modal-footer
+                        button(type='button',data-dismiss='modal').btn.btn-default 取消
+                        button(id='collect-commit',type='button',data-dismiss='modal').btn.btn-primary 确定
