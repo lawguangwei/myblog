@@ -8,4 +8,8 @@ Picture.findByAlbumAndPage = function(userId,albumId,page,cb){
         skip(rows).limit(20).exec(cb);
 }
 
+Picture.getIndexPictures = function(userId,cb){
+    return Picture.find({user:userId,saveType:'public'}).exec(cb);
+}
+
 module.exports = Picture;

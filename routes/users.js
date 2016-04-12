@@ -24,7 +24,37 @@ conn.once('open', function (msg) {
 });
 
 
-router.get('/:id/index',UserFilter.checkLogin, function(req, res,next) {
+router.get('/:id/index',UserFilter.isMe,function(req, res,next) {
+    var userId = req.params.id;
+    User.findOne({_id:userId},function(err,user){
+        if(err){
+            console.log('error');
+            res.send('500 Eorror');
+        }else{
+            PersonImg.findOne({email:user.email},function(err,img){
+                var image = '/images/person-img.png';
+                if(!err){
+                    if(img){
+                        image = img.imgSrc;
+                    }
+                }
+                var params = {
+                    asset: {
+                        js:['/javascripts/index.js'],
+                        css:['/stylesheets/index.css']
+                    },
+                    user:req.session.user,   //登录用户
+                    owner:user,             //查看用户
+                    image:image,
+                    isMe:true
+                }
+                res.render('user/user_index',{title:'用户主页',params:params});
+            });
+        }
+    });
+});
+
+router.get('/:id/index',function(req, res) {
     var userId = req.params.id;
     User.findOne({_id:userId},function(err,user){
         if(err){
@@ -44,7 +74,9 @@ router.get('/:id/index',UserFilter.checkLogin, function(req, res,next) {
                         css:['/stylesheets/index.css']
                     },
                     user:req.session.user,
-                    image:image
+                    image:image,
+                    owner:user,
+                    isMe:false
                 }
                 res.render('user/user_index',{title:'用户主页',params:params});
             });

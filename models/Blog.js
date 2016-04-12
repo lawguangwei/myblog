@@ -9,4 +9,8 @@ Blog.findByWritersAndPage = function(id,page,cb){
         skip(rows).limit(20).exec(cb);
 }
 
+Blog.getUserIndexBlog = function(id,cb){
+    return Blog.find({writer:id,type:'public'}).sort({createDate:-1}).limit(5).exec(cb);
+}
+
 module.exports = Blog;

@@ -22,14 +22,14 @@ a{
 
 #catalog{
     width: 200px;
-    border: 2px solid #000;
+    box-shadow: 0 0 4px #999;
     background: #ffffff;
     float: left;
 }
 
 #blog-list{
     width: 780px;
-    border: 2px solid #000;
+    box-shadow: 0 0 4px #999;
     background: #ffffff;
     margin-left: 20px;
     float: left;

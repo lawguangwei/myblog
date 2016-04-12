@@ -71,7 +71,7 @@ router.get('/upload',UserFilter.checkLogin,function(req,res){
 router.post('/upload',UserFilter.checkLogin,multipartMiddleware,function(req,res){
     var user = req.session.user;
     var file = req.files.file;
-    var album = req.body.album;
+    var albumId = req.body.album;
     if(!fs.existsSync('./public/userImage/'+user._id)){
         fs.mkdirSync('./public//userImage/'+user._id);
     }
@@ -95,20 +95,23 @@ router.post('/upload',UserFilter.checkLogin,multipartMiddleware,function(req,res
         if(err){
             res.json({code:'1'});
         }else{
-            var picture = new Picture({
-                name:file.name,
-                type:file.type,
-                size:file.size,
-                path:targetPath,
-                user:user._id,
-                album:album,
-            });
-            picture.save(function(err){
-                if(err){
-                    res.json({code:'1'});
-                }else{
-                    res.json({code:'0'});
-                }
+            PictureAlbum.findOne({_id:albumId},function(err,album){
+                var picture = new Picture({
+                    name:file.name,
+                    type:file.type,
+                    saveType:album.type,
+                    size:file.size,
+                    path:targetPath,
+                    user:user._id,
+                    album:album._id,
+                });
+                picture.save(function(err){
+                    if(err){
+                        res.json({code:'1'});
+                    }else{
+                        res.json({code:'0'});
+                    }
+                });
             });
         }
     });
@@ -193,14 +196,19 @@ router.get('/checkAlbum/:id',function(req,res){
 router.post('/setAlbumFace',UserFilter.checkLogin,function(req,res){
     var albumId = req.body.albumId;
     var src = req.body.src;
-
-    console.
     PictureAlbum.update({_id:albumId},{$set:{face:src}},{upsert:true},function(err){
         if(err){
             res.json({'code':'1'});
         }else{
             res.json({'code':'0'});
         }
+    });
+});
+
+router.post('/getIndexPictures',function(req,res){
+    var ownerId = req.body.ownerId;
+    Picture.getIndexPictures(ownerId,function(err,pictures){
+        res.json({'code':'0', 'pictures':pictures});
     });
 });
 

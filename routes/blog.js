@@ -233,4 +233,16 @@ router.get('/getCollect',UserFilter.checkLogin,function(req,res){
         }
     });
 });
+
+//首页
+router.post('/getUserBlog',function(req,res){
+    var ownerId = req.body.ownerId;
+    Blog.getUserIndexBlog(ownerId,function(err,blogs){
+        if(err){
+            console.log(err);
+        }else{
+            res.json({'code':0,'blogs':blogs});
+        }
+    });
+});
 module.exports = router;

@@ -18,7 +18,7 @@ a{
 }
 
 #blog-div{
-    border: 2px solid #000000;
+    box-shadow: 0 0 4px #999;
     background: #FFFFFF;
     padding: 20px 20px 20px 20px;
 }
