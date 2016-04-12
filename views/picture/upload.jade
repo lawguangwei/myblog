@@ -1,0 +1,42 @@
+extends ../layout/index_layout
+block content
+    div(id='content-pane')
+        div(id='upload-pane')
+            p
+                a(href='/users/' + params.user._id + '/picture') 到相册
+            label.text-info 选择相册
+                a(data-toggle='modal',data-target='#create-album') &nbsp;创建相册
+            form(id='form-img',enctype='multipart/form-data',method='post')
+                select(id='album',name='album',style='width:300px').form-control
+                input(id='upload-file',type='file',name='file',accept="image/gif, image/jpeg,image/jpg,image/png").hidden
+            button(id='add-picture',style='margin:20px 0 0 0').btn.btn-primary 添加
+            button(id='upload-picture',style='margin:20px 0 0 20px').btn.btn-default 上传
+            div(id='picture-pane').container-fluid
+
+    div(id='create-album',tabindex='-1',role='dialog',aria-labelledby='albumLabel').modal.fade
+        div(role='document').modal-dialog
+            div.modal-content
+                div.modal-header
+                    button(type='button',data-dismiss='modal',aria-label='Close').close
+                        span(aria-hidden='true') &times;
+                    h4(id='albumLabel').modal-title 创建相册
+                div.modal-body
+                    div.container-fluid
+                        form.form-horizontal
+                            div.form-group
+                                label.col-md-3.control-label 相册名称:
+                                div.col-md-7
+                                    input(id='input-album-name',type='text').form-control
+                            div.form-group
+                                div.col-md-offset-3
+                                    label.radio-inline
+                                        input(type='radio',name='album-type',id='type-public',value='public',checked)
+                                        span 公开
+                                    label.radio-inline
+                                        input(type='radio',name='album-type',id='type-private',value='private')
+                                        span 私人
+                div.modal-footer
+                    button(type='button',data-dismiss='modal').btn.btn-default 取消
+                    button(id='album-commit',type='button',data-dismiss='modal').btn.btn-primary 确定
+
+

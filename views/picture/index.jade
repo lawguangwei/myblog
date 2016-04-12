@@ -1,0 +1,31 @@
+extends ../layout/index_layout
+block content
+    div(id='content-pane')
+        div(id='info-nav')
+            div.li-line
+            ul
+                li
+                    a(href='/users/'+params.ownerId+'/index') 首页
+                li
+                    a(href='/users/'+params.ownerId+'/blog') 博文
+                li
+                    a 相册
+                li
+                    a 视频
+                li
+                    a 关于我
+        div(id='picture-pane').container-fluid
+            -for(var i = 0;i<params.albums.length;i++)
+                div.col-md-3
+                    div.col-md-12.picture-item
+                        a(href='picture/checkAlbum/'+params.albums[i]._id)
+                            img(src=params.albums[i].face).col-md-12
+                        table.table.table-striped
+                            tr
+                                td.text-info 相册名
+                                td.text-success #{params.albums[i].name}
+                            tr
+                                td.text-info 创建时间
+                                -var date = new Date(params.albums[i].createDate)
+                                td.text-success #{date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()}
+

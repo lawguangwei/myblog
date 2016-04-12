@@ -1,0 +1,25 @@
+extends ../layout/index_layout
+block content
+    div(id='content-pane')
+        div(id='picture-pane').container-fluid
+            p
+                a(href='/users/'+params.ownerId+'/picture') 返回
+            -for(var i = 0;i<params.pictures.length;i++)
+                -var paths = params.pictures[i].path.split('/');
+                div.col-md-3
+                    a(data-toggle='modal',data-target='#show-picture').a-img
+                        img(src='/userImage/'+paths[paths.length-2]+'/'+paths[paths.length-1]).col-md-12
+                        -if(params.isMe)
+                            a(album=params.pictures[i].album).a-face 设为封面
+            br
+    div(id='show-picture',tabindex='-1',role='dialog',aria-labelledby='showPicLabel').modal.fade
+        div.container-fluid
+            img(id='img-show').col-md-10.col-md-offset-1
+            div.col-md-12
+                a(data-dismiss='modal').btn.btn-default.col-md-offset-1 返回
+                a(id='last-picture').btn.btn-default.col-md-offset-1 上一张
+                a(id='next-picture').btn.btn-default.col-md-offset-1 下一张
+
+
+
+

@@ -1,0 +1,42 @@
+body{
+    background: url("../images/cloud.jpg");
+    font-family: Arial;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    cursor: pointer;
+}
+
+#content-pane{
+    width: 1000px;
+    margin: 0 auto 0 auto;
+}
+
+#picture-pane{
+    box-shadow: 0 0 4px #000000;
+    padding: 20px;
+    background: #ffffff;
+}
+
+#picture-pane img{
+    padding: 0;
+    height: 150px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px #000000;
+}
+
+#show-picture{
+    width: 1000px;
+    margin: 20px auto 0 auto;
+}
+
+#img-show{
+    padding: 0;
+    box-shadow: 0 0 20px #000000;
+    margin-bottom: 10px;
+}
+

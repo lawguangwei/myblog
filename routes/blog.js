@@ -7,7 +7,6 @@ var Collection = require('../models/Collection');
 
 function getUserId(path){
     var paths = path.split('/');
-    console.log(paths);
     return paths[2];
 }
 /* GET home page.
