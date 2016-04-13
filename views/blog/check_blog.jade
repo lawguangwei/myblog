@@ -1,7 +1,7 @@
 extends ../layout/index_layout
 block content
     div(id='content-pane')
-        div(id='blog-div')
+        div(id='blog-div',blogId=params.blog._id)
             a(href='/users/'+params.ownerId+'/blog')
                 p 返回
             h3.text-info #{params.blog.title}
@@ -12,3 +12,14 @@ block content
                 -if(params.isMe)
                     a(href='/users/'+params.user._id+'/blog/modify/'+params.blog._id)  [编辑]
             div!=params.blog.content
+
+        div(id='div-comment')
+            -if(params.user)
+                p 留言
+                textarea(id='text-comment').form-control
+                br
+                btn(id='submit-comment').btn.btn-primary 提交
+            div(id='comment-pane')
+            ul(id='ul-pagination').pagination
+        br
+
