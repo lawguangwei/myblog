@@ -14,48 +14,60 @@ function getUserId(path){
     return paths[2];
 }
 
+
 router.get('/',UserFilter.isMe,function(req,res){
     var userId = getUserId(req.baseUrl);
-    PictureAlbum.findByUser(userId,function(err,albums){
-        if(err){
-            console.log(err);
-            res.send('500 Server Error');
-        }else{
-            var params = {
-                user:req.session.user,
-                asset:{
-                    css:['/stylesheets/picture-index.css'],
-                    js:['/javascripts/picture-index.js']
-                },
-                albums:albums,
-                ownerId:userId,
-                isMe:true
-            };
-            res.render('picture/index',{title:'相册',params:params});
-        }
-    });
+    var params = {
+        user:req.session.user,
+        asset:{
+            css:['/stylesheets/picture-index.css'],
+            js:['/javascripts/picture-index.js']
+        },
+        ownerId:userId,
+        isMe:true
+    };
+    res.render('picture/index',{title:'相册',params:params});
 });
 
 router.get('/',function(req,res){
     var userId = getUserId(req.baseUrl);
-    PictureAlbum.findByUser(userId,function(err,albums){
+    var params = {
+        asset:{
+            css:['/stylesheets/picture-index.css'],
+            js:['/javascripts/picture-index.js']
+        },
+        ownerId:userId,
+        isMe:false,
+    };
+    res.render('picture/index',{title:'相册',params:params});
+});
+
+router.post('/getAlbums',UserFilter.isMe,function(req,res){
+    var userId = req.body.userId;
+    var page = req.body.page;
+    PictureAlbum.findByUserAndPage1(userId,page,function(err,albums){
         if(err){
             console.log(err);
-            res.send('500 Server Error');
+            res.json({'code':'1'});
         }else{
-            var params = {
-                asset:{
-                    css:['/stylesheets/picture-index.css'],
-                    js:['/javascripts/picture-index.js']
-                },
-                albums:albums,
-                ownerId:userId,
-                isMe:false,
-            };
-            res.render('picture/index',{title:'相册',params:params});
+            res.json({'code':'0','albums':albums,'isMe':true})
         }
     });
 });
+
+router.post('/getAlbums',function(req,res){
+    var userId = req.body.userId;
+    var page = req.body.page;
+    PictureAlbum.findByUserAndPage2(userId,page,function(err,albums){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'});
+        }else{
+            res.json({'code':'0','albums':albums,'isMe':false})
+        }
+    });
+});
+
 
 router.get('/upload',UserFilter.checkLogin,function(req,res){
     var params = {
@@ -151,7 +163,7 @@ router.get('/getAlbum',UserFilter.checkLogin,function(req,res){
 router.get('/checkAlbum/:id',UserFilter.isMe,function(req,res){
     var userId = getUserId(req.baseUrl);
     var albumId = req.params.id;
-    Picture.findByAlbumAndPage(userId,albumId,1,function(err,pictures){
+    Picture.findByAlbumAndPage1(userId,albumId,1,function(err,pictures){
         if(err){
             console.log(err);
             res.send('500 server error');
@@ -164,6 +176,7 @@ router.get('/checkAlbum/:id',UserFilter.isMe,function(req,res){
                 },
                 pictures:pictures,
                 ownerId:userId,
+                albumId:albumId,
                 isMe:true
             };
             res.render('picture/album',{title:'相册',params:params});
@@ -174,7 +187,7 @@ router.get('/checkAlbum/:id',UserFilter.isMe,function(req,res){
 router.get('/checkAlbum/:id',function(req,res){
     var userId = getUserId(req.baseUrl);
     var albumId = req.params.id;
-    Picture.findByAlbumAndPage(userId,albumId,1,function(err,pictures){
+    Picture.findByAlbumAndPage2(userId,albumId,1,function(err,pictures){
         if(err){
             console.log(err);
             res.send('500 server error');
@@ -185,10 +198,39 @@ router.get('/checkAlbum/:id',function(req,res){
                     js:['/javascripts/album.js']
                 },
                 pictures:pictures,
+                albumId:albumId,
                 ownerId:userId,
                 isMe:false
             };
             res.render('picture/album',{title:'相册',params:params});
+        }
+    });
+});
+
+router.post('/getAlbumPictures',UserFilter.isMe,function(req,res){
+    var userId = req.body.userId;
+    var albumId = req.body.albumId;
+    var page = req.body.page;
+    Picture.findByAlbumAndPage1(userId,albumId,page,function(err,pictures){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'});
+        }else{
+            res.json({'code':'0','pictures':pictures,'isMe':true});
+        }
+    });
+});
+
+router.post('/getAlbumPictures',function(req,res){
+    var userId = req.body.userId;
+    var albumId = req.body.albumId;
+    var page = req.body.page;
+    Picture.findByAlbumAndPage2(userId,albumId,page,function(err,pictures){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'});
+        }else{
+            res.json({'code':'0','pictures':pictures,'isMe':false});
         }
     });
 });
@@ -211,6 +253,96 @@ router.post('/getIndexPictures',function(req,res){
         res.json({'code':'0', 'pictures':pictures});
     });
 });
+
+router.post('/deletePicture',UserFilter.checkLogin,function(req,res){
+    var pictureId = req.body.pictureId;
+    Picture.remove({'_id':pictureId},function(err){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'})
+        }else{
+            res.json({'code':'0'});
+        }
+    });
+});
+
+router.post('/configAlbum',UserFilter.checkLogin,function(req,res){
+    var albumId = req.body.albumId;
+    var albumName = req.body.albumName;
+    var albumType = req.body.albumType;
+
+    PictureAlbum.update({_id:albumId},{$set:{name:albumName,type:albumType}},{multi:true},function(err){
+        if(err){
+            res.json({'code':'1'});
+        }else{
+            Picture.update({album:albumId},{$set:{saveType:albumType}},{multi:true},function(err){
+                if(err){
+                    res.json({'code':'1'});
+                }else{
+                    res.json({'code':'0'});
+                }
+            })
+        }
+    });
+
+});
+
+router.post('/removeAlbum',UserFilter.checkLogin,function(req,res){
+    var albumId = req.body.albumId;
+    Picture.remove({album:albumId},function(err){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'});
+        }else{
+            PictureAlbum.remove({_id:albumId},function(err){
+                if(err){
+                    console.log(err);
+                    res.json({'code':'1'});
+                }else{
+                    res.json({'code':'0'});
+                }
+            });
+        }
+    });
+});
+
+router.post('/getAlbumPages',UserFilter.isMe,function(req,res){
+    var userId = req.body.userId;
+    PictureAlbum.count({user:userId},function(err,nums){
+        if(err){
+            console.log(err);
+        }else{
+            var pages = nums/16+1;
+            res.json({'code':'0','pages':pages});
+        }
+    });
+});
+router.post('/getAlbumPages',function(req,res){
+    var userId = req.body.userId;
+    PictureAlbum.count({user:userId,type:'public'},function(err,nums){
+        if(err){
+            console.log(err);
+        }else{
+            var pages = nums/16+1;
+            res.json({'code':'0','pages':pages});
+        }
+    });
+});
+
+
+router.post('/getPicturePages',function(req,res){
+    var albumId = req.body.albumId;
+    Picture.count({album:albumId},function(err,nums){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(nums);
+            var pages = nums/12+1;
+            res.json({'code':'0','pages':pages});
+        }
+    });
+});
+
 
 
 module.exports = router;

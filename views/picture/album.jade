@@ -1,17 +1,12 @@
 extends ../layout/index_layout
 block content
     div(id='content-pane')
-        div(id='picture-pane').container-fluid
+        div(id='picture-pane',owner-id=params.ownerId,album-id=params.albumId).container-fluid
             p
                 a(href='/users/'+params.ownerId+'/picture') 返回
-            -for(var i = 0;i<params.pictures.length;i++)
-                -var paths = params.pictures[i].path.split('/');
-                div.col-md-3
-                    a(data-toggle='modal',data-target='#show-picture').a-img
-                        img(src='/userImage/'+paths[paths.length-2]+'/'+paths[paths.length-1]).col-md-12
-                        -if(params.isMe)
-                            a(album=params.pictures[i].album).a-face 设为封面
             br
+        ul(id='ul-pagination').pagination
+
     div(id='show-picture',tabindex='-1',role='dialog',aria-labelledby='showPicLabel').modal.fade
         div.container-fluid
             img(id='img-show').col-md-10.col-md-offset-1
