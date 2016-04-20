@@ -9,32 +9,20 @@ block content
                 li
                     a(href='/users/'+params.ownerId+'/blog') 博文
                 li
-                    a 相册
-                li
-                    a 视频
-                li
-                    a 关于我
+                    a(href='/users/'+params.ownerId+'/picture') 相册
         div(id='catalog')
             ul
                 li
-                    a 全部博文
-        div(id='blog-list')
-            label.text-info 全部博文
+                    a(coll='all').a-collection 全部博文
+        div(id='blog-list',owner-id=params.ownerId)
+            label(id="coll-title").text-info 全部博文
             table.table.table-condensed
                 tr.info
                     td(style='width:500px') 标题
                     td 创建时间
                     -if(params.isMe)
                         td
-                -for(var i=0;i<params.blogs.length;i++)
-                    -var date = new Date(params.blogs[i].createDate)
-                    tr
-                        td
-                            a(href='/users/'+params.ownerId+'/blog/check/'+params.blogs[i]._id) #{params.blogs[i].title}
-                        td #{date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+":"+date.getSeconds()}
-                        -if(params.isMe)
-                            td
-                                a(blog-id=params.blogs[i]._id).a-delete-blog 删除
+            ul(id='ul-pagination').pagination
 
 
 

@@ -71,8 +71,88 @@ router.get('/',function(req, res ,next) {
     });
 });
 
-router.get('/about', function(req, res) {
-    res.send('About birds');
+router.post('/getBlogList',UserFilter.isMe,function(req,res){
+    var userId = req.body.userId;
+    var collection = req.body.collection;
+    var page = req.body.page;
+
+    Blog.findByCollectionAndPage1(userId,collection,page,function(err,blogs){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'});
+        }else{
+            res.json({'code':'0',blogs:blogs,'isMe':true})
+        }
+    });
+
+});
+
+router.post('/getBlogList',function(req,res){
+    var userId = req.body.userId;
+    var collection = req.body.collection;
+    var page = req.body.page;
+
+    Blog.findByCollectionAndPage2(userId,collection,page,function(err,blogs){
+        if(err){
+            console.log(err);
+            res.json({'code':'1'});
+        }else{
+            res.json({'code':'0',blogs:blogs,'isMe':false})
+        }
+    });
+
+});
+
+router.post('/getBlogPages',UserFilter.isMe,function(req,res){
+    var userId = req.body.userId;
+    var collection = req.body.collection;
+    if(collection == 'all'){
+        Blog.count({writer:userId},function(err,nums){
+            if(err){
+                console.log(err);
+                res.json({'code':'1'});
+            }else{
+                var pages = nums/20+1;
+                res.json({'code':'0','pages':pages});
+            }
+        });
+    }else{
+        Blog.count({Collection:collection},function(err,nums){
+            if(err){
+                console.log(err);
+                res.json({'code':'1'});
+            }else{
+                var pages = nums/20+1;
+                res.json({'code':'0','pages':pages});
+            }
+        });
+    }
+});
+router.post('/getBlogPages',function(req,res){
+    var userId = req.body.userId;
+    console.log(userId);
+    var collection = req.body.coll;
+    if(collection == 'all'){
+        Blog.count({writer:userId,type:'public'},function(err,nums){
+            if(err){
+                console.log(err);
+                res.json({'code':'1'});
+            }else{
+                var pages = nums/20+1;
+                res.json({'code':'0','pages':pages});
+            }
+        });
+    }else{
+        Blog.count({Collection:collection,type:'public'},function(err,nums){
+            if(err){
+                console.log(err);
+                res.json({'code':'1'});
+            }else{
+                var pages = nums/20+1;
+                res.json({'code':'0','pages':pages});
+            }
+        });
+    }
 });
 
 router.get('/write',UserFilter.checkLogin,function(req,res){
@@ -208,11 +288,9 @@ router.post('/deleteBlog',UserFilter.checkLogin,function(req,res){
 
 router.post('/createCollect',UserFilter.checkLogin,function(req,res){
     var name = req.body.name;
-    var type = req.body.type;
     var collection = new Collection({
         collectionName : name,
         user : req.session.user._id,
-        type : type,
     });
     collection.save(function(err){
         if(err){
@@ -223,8 +301,8 @@ router.post('/createCollect',UserFilter.checkLogin,function(req,res){
     });
 });
 
-router.get('/getCollect',UserFilter.checkLogin,function(req,res){
-    var userId = req.session.user._id;
+router.post('/getCollect',function(req,res){
+    var userId = req.body.userId;
     Collection.findByUser(userId,function(err,collections){
         if(err){
             res.json({code:'1'});

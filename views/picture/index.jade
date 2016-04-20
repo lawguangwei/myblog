@@ -9,11 +9,7 @@ block content
                 li
                     a(href='/users/'+params.ownerId+'/blog') 博文
                 li
-                    a 相册
-                li
-                    a 视频
-                li
-                    a 关于我
+                    a(href='/users/'+params.ownerId+'/picture') 相册
         div(id='picture-pane',owner-id=params.ownerId).container-fluid
         ul(id='ul-pagination').pagination
     div(id='config-album',tabindex='-1',role='dialog',aria-labelledby='configLabel').modal.fade

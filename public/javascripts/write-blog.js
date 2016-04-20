@@ -61,10 +61,11 @@ function createCollect(name,type){
 }
 
 function setCollection(){
+    var userId = $('#write-pane').attr('user-id');
     $.ajax({
-        type:'get',
+        type:'post',
         url:'getCollect',
-        data:{},
+        data:{'userId':userId},
         dataType:'json',
         success:function(result){
             if(result['code'] == '0'){

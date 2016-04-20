@@ -19,12 +19,8 @@ html
                      span.icon-bar
                      span.icon-bar
                      span.icon-bar
-                  a(href='#').navbar-brand NoBlog
+                  a(href='/').navbar-brand 博客
                div(id='navbar').collapse.navbar-collapse
-                  form(role='search').navbar-form.navbar-left
-                     div.form-group
-                        input(type='text',placeholder='博主名').form-control
-                        button(type='submit').btn.btn-default 找人
                   ul.nav.navbar-nav.navbar-right
                      li.dropdown
                         -if(!params.user)

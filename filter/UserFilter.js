@@ -60,7 +60,6 @@ var UserFiler = {
 
 function getUserId(path){
     var paths = path.split('/');
-    console.log(paths);
     return paths[2];
 }
 
