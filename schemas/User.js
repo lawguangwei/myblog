@@ -16,6 +16,7 @@ var UserSchemas = new mongoose.Schema({
         company:String,
     },
     marriage:{type:String,default:'单身'},
+    personUrl:String,
     personInfo:String
 });
 

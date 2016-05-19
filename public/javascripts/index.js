@@ -41,13 +41,18 @@ function getBlog(){
                 var content = '<div class="col-md-12">' +
                     '<h2 class="text-info">'+blog.title+'</h2>' +
                     '<div class="li-line"></div>' +
-                    '<p>创建时间&nbsp;&nbsp;'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+
-                    '&nbsp;&nbsp;<span class="blog-item">&nbsp;&nbsp;阅读量:<span class="text-danger">11</span></span></p>' +
+                    '<p>创建时间&nbsp;&nbsp;'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+ '</p>' +
                     '<div class="blog-content">'+blog.content+'</div>' +
                     '<a href="/users/'+ownerId+'/blog/check/'+blog._id+'">'+'阅读全文</a>' +
                     '</div>';
                 $('#blog-pane').append(content);
             });
+            if(blogs.length == 0){
+                var content = '<div class="col-md-12">' +
+                    '<h2 class="text-info">暂无博文</h2>' +
+                    '</div>';
+                $('#blog-pane').append(content);
+            }
         }
     });
 }

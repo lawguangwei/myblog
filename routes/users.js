@@ -8,15 +8,11 @@ var PersonImg = require('../models/PersonImg');
 var crypto = require('crypto');
 var UserFilter = require('../filter/UserFilter');
 
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
-
-
 var mongoose = require('mongoose');
-var Grid = require('gridfs-stream');
+//var Grid = require('gridfs-stream');
 
 
-mongoose.connect('mongodb://localhost/myblog');
+mongoose.connect('mongodb://localhost/law');
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'connection error:'));
 conn.once('open', function (msg) {
@@ -194,6 +190,7 @@ router.post('/setImg',UserFilter.checkLogin,multipartMiddleware,function(req,res
     });
 });
  */
+
 router.post('/setImg',UserFilter.checkLogin,function(req,res,next){
     var email = req.session.user.email;
     var img = req.body.img;
@@ -206,6 +203,7 @@ router.post('/setImg',UserFilter.checkLogin,function(req,res,next){
     });
 });
 
+/**
 router.get('/checkImg',function(rep,res,next){
     var gfs = Grid(conn.db, mongoose.mongo);
     var readstream = gfs.createReadStream({
@@ -213,6 +211,8 @@ router.get('/checkImg',function(rep,res,next){
     });
     readstream.pipe(res);
 });
+
+ */
 
 router.post('/setBaseInfo',UserFilter.checkLogin,function(req,res,next){
     var email = req.session.user.email;
@@ -283,5 +283,35 @@ router.post('/setPersonInfo',UserFilter.checkLogin,function(req,res,next){
     });
 });
 
+router.post('/setPersonUrl',UserFilter.checkLogin,function(req,res){
+    var userId = req.session.user._id;
+    var personUrl = req.body.personUrl;
+    User.update({_id:userId},{$set:{personUrl:personUrl}},{upsert:false},function(err){
+        User.findOne({_id:userId},function(err,user){
+            if(err){
+                console.log(err);
+                res.json({code:'1'});
+            }else{
+                req.session.user = user;
+                res.json({code:'0'});
+            }
+        });
+    });
+});
+router.post('/checkPersonUrl',UserFilter.checkLogin,function(req,res){
+    var personUrl = req.body.personUrl;
+    User.findOne({personUrl:personUrl},function(err,user){
+        if(err){
+            console.log(err);
+            res.json({code:'1'});
+        }else{
+            if(user){
+                res.json({code:'2'});
+            }else{
+                res.json({code:'0'});
+            }
+        }
+    });
+});
 
 module.exports = router;

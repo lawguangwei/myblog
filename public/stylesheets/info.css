@@ -184,3 +184,11 @@ a{
     margin: 0 auto 0 auto;
     padding: 20px 20px 20px 20px;
 }
+
+#div-url{
+    background: #ffffff;
+    box-shadow: 0 0 10px #999;
+    width: 1000px;
+    margin: 0 auto 0 auto;
+    padding: 20px 20px 20px 20px;
+}

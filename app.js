@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var blog = require('./routes/blog');
@@ -39,6 +40,7 @@ app.use('/users', users);
 app.use('/users/:id/blog',blog);
 app.use('/users/:id/picture',picture);
 app.use('/comment',comment);
+
 app.use('/ueditor/ue',ueditor({//这里的/ueditor/ue是因为文件件重命名为了ueditor,如果没改名，那么应该是/ueditor版本号/ue
     configFile: '/ueditor/php/config.json',//如果下载的是jsp的，就填写/ueditor/jsp/config.json
     mode: 'local', //本地存储填写local

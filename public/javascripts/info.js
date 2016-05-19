@@ -27,6 +27,11 @@ $(function(){
         var info = $('#text-person-info').val();
         setPersonInfo(info);
     });
+
+    $('#btn-set-url').on('click',function(){
+        var url = $('#text-url').val();
+        checkPersonUrl(url);
+    })
 })
 
 
@@ -140,6 +145,42 @@ function setPersonInfo(info){
     });
 }
 
+function setPersonUrl(url){
+    $.ajax({
+        url:'/users/setPersonUrl',
+        type:'post',
+        data:{personUrl:url},
+        dataType:'json',
+        success:function(result){
+            if(result['code'] == '0'){
+                alert('个人信息修改成功!');
+                location.reload();
+            }else{
+                alert('修改失败!');
+            }
+        }
+    })
+}
+function checkPersonUrl(url){
+    $.ajax({
+        url:'/users/checkPersonUrl',
+        type:'post',
+        data:{personUrl:url},
+        dataType:'json',
+        success:function(result){
+            if(result['code'] == '0'){
+                setPersonUrl(url);
+            }else{
+                if(result['code'] == '2'){
+                    alert('地址已占用!');
+                }
+                if(result['code'] == '1'){
+                    alert('修改失败!');
+                }
+            }
+        }
+    })
+}
 /*
  function uploadImg(data){
  var myxhr;

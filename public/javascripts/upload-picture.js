@@ -9,7 +9,11 @@ $(function(){
     $('#upload-picture').hide();
 
     $('#add-picture').on('click',function(){
-       $('#upload-file').click();
+        if(!$('#album').val()){
+            alert('请选择相册');
+        }else{
+            $('#upload-file').click();
+        }
     });
 
     $('#upload-file').on('change', function(){

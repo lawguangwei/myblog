@@ -13,7 +13,7 @@ User.register = function(email,name,password,req,res){
             res.send(handleError(err));
         }else{
             req.session.user = user;
-            res.send('注册成功');
+            res.redirect('/');
         }
     });
 }
