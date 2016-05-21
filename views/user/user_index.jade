@@ -4,9 +4,10 @@
 extends ../layout/index_layout
 
 block content
-   h1.text-info Chirs的博客
+   h1.text-info #{params.owner.name}的博客
    p.text-info
-      a.text-info http://chris.myblog.com
+      -if(params.owner.personUrl)
+         a(href='http://localhost:3000/'+params.owner.personUrl).text-info http://localhost:3000/#{params.owner.personUrl}
    div(id='person-pane',owner-id=params.owner._id)
       img(id='person-img',alt='头像',src=params.image)
       ul(id='person-info')

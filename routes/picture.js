@@ -7,6 +7,7 @@ var multipartMiddleware = multipart();
 var fs = require('fs');
 var Picture = require('../models/Picture');
 var PictureAlbum = require('../models/PictureAlbum');
+var formidable=require('formidable');
 
 
 function getUserId(path){
@@ -102,9 +103,12 @@ router.post('/upload',UserFilter.checkLogin,multipartMiddleware,function(req,res
             extName = 'png';
             break;
     }
-    var targetPath = './public/userImage/'+user._id+'/'+user._id + file.name + Date.parse(new Date())+'.'+extName;
+    var targetPath = './public/userImage/'+user._id+'/'+user._id + Date.parse(new Date()) + file.name;
+    var form = new formidable.IncomingForm();
+    form.uploadDir = "./tmp";
     fs.rename(file.path,targetPath,function(err){
         if(err){
+            console.log(err);
             res.json({code:'1'});
         }else{
             PictureAlbum.findOne({_id:albumId},function(err,album){

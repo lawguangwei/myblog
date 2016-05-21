@@ -12,8 +12,7 @@ User.register = function(email,name,password,req,res){
         if (err){
             res.send(handleError(err));
         }else{
-            req.session.user = user;
-            res.redirect('/');
+            res.redirect('/users/login');
         }
     });
 }

@@ -114,6 +114,32 @@ router.post('/login',function(req,res){
 });
 
 /**
+ * login_ajax
+ */
+router.post('/loginAjax',function(req,res){
+    var email = req.body.email;
+    var password = req.body.password;
+    var md5 = crypto.createHash('md5');
+    md5.update(password);
+    password = md5.digest('hex');
+    User.findByEmail(email,function(err,user){
+        if(err){
+            res.send(handlerError(err));
+        } else{
+            if(user == null){
+                res.json({code:'2'});          //用户不存在
+            }else{
+                if(user.password == password){
+                    req.session.user = user;
+                    res.json({code:'0'});            //用户登录成功
+                }else{
+                    res.json({code:'1'});            //用户密码错误
+                }
+            }
+        }
+    });
+});
+/**
  *
  */
 router.get('/logout',function(req,res,next){

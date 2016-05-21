@@ -1,5 +1,6 @@
 doctype html
 html
+
    head
       title= title
       link(rel='stylesheet',href='/bootstrap/css/bootstrap.min.css')
@@ -7,6 +8,7 @@ html
         link(rel='stylesheet', href=params.asset.css[i])
       script(type='text/javascript',src='/javascripts/jquery-2.2.0.min.js')
       script(type='text/javascript',src='/bootstrap/js/bootstrap.min.js')
+      script(type='text/javascript',src='/javascripts/index-layout.js')
       -for(var i=0;i<params.asset.js.length;i++)
         script(type='text/javascript',src=params.asset.js[i])
    body
@@ -24,7 +26,7 @@ html
                   ul.nav.navbar-nav.navbar-right
                      li.dropdown
                         -if(!params.user)
-                            a(href='/users/login',role='button') 登录
+                            a(href='#',role='button',data-toggle="modal",data-target='#login-div') 登录
                         -else
                             a(href='#',data-toggle='dropdown',role='button',aria-haspopup='true',aria-expaned='false').dropdown-toggle #{params.user.name}
                                span.caret
@@ -39,3 +41,25 @@ html
                                li
                                   a(href='/users/logout') 退出
          block content
+
+       div(id='login-div',tabindex='-1',role='dialog',aria-labelledby='loginLabel').modal.fade
+           div(role='document').modal-dialog
+               div.modal-content
+                   div.modal-header
+                       button(type='button',data-dismiss='modal',aria-label='Close').close
+                           span(aria-hidden='true') &times;
+                       h4(id='loginLabel').modal-title 用户登录
+                   div.modal-body
+                       div.container-fluid
+                           form.form-horizontal
+                               div.form-group
+                                   label.col-md-3.control-label 用户邮箱:
+                                   div.col-md-7
+                                       input(id='login-email',type='text').form-control
+                               div.form-group
+                                   label.col-md-3.control-label 密码:
+                                   div.col-md-7
+                                       input(id='login-password',type='password').form-control
+                   div.modal-footer
+                       button(type='button',data-dismiss='modal').btn.btn-default 取消
+                       button(id='btn-login',type='button').btn.btn-primary 确定

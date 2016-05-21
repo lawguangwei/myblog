@@ -15,7 +15,8 @@ router.get('/',function(req,res,next){
 });
 
 router.get('/:url',function(req,res){
-    User.findOne({personUrl:req.param.url},function(err,user){
+    //console.log(req.params.url);
+    User.findOne({personUrl:req.params.url},function(err,user){
         if(err){
             res.send('用户不存在');
         }else{
