@@ -1,17 +1,16 @@
 extends ../layout/index_layout
 block content
-    div(id='content-pane')
-        div(id='upload-pane')
-            p
-                a(href='/users/' + params.user._id + '/picture') 到相册
-            label.text-info 选择相册
-                a(data-toggle='modal',data-target='#create-album') &nbsp;创建相册
-            form(id='form-img',enctype='multipart/form-data',method='post')
-                select(id='album',name='album',style='width:300px').form-control
-                input(id='upload-file',type='file',name='file',accept="image/gif, image/jpeg,image/jpg,image/png").hidden
-            button(id='add-picture',style='margin:20px 0 0 0').btn.btn-primary 添加
-            button(id='upload-picture',style='margin:20px 0 0 20px').btn.btn-default 上传
-            div(id='picture-pane').container-fluid
+    div(id='upload-pane')
+        p
+            a(href='/users/' + params.user._id + '/picture') 到相册
+        label 选择相册
+            a(data-toggle='modal',data-target='#create-album') &nbsp;创建相册
+        form(id='form-img',enctype='multipart/form-data',method='post')
+            select(id='album',name='album',style='width:300px').form-control
+            input(id='upload-file',type='file',name='file',accept="image/gif, image/jpeg,image/jpg,image/png").hidden
+        button(id='add-picture',style='margin:20px 0 0 0').btn.btn-primary 添加
+        button(id='upload-picture',style='margin:20px 0 0 20px').btn.btn-default 上传
+        div(id='picture-pane').container-fluid
 
     div(id='create-album',tabindex='-1',role='dialog',aria-labelledby='albumLabel').modal.fade
         div(role='document').modal-dialog

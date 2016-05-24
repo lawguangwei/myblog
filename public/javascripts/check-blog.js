@@ -1,5 +1,6 @@
 var commentPage = 1;
 $(function(){
+    new WOW().init();
     $('#submit-comment').on('click',function(){
         var content = $('#text-comment').val();
         var blogId = $('#blog-div').attr('blogId');

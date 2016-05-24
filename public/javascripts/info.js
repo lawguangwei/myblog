@@ -2,6 +2,7 @@
  * Created by luoguangwei on 16/3/19.
  */
 $(function(){
+    new WOW().init();
     setImg();
     $('#btn-set-base').on('click',function(){
         var name;

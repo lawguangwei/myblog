@@ -1,4 +1,5 @@
 $(function(){
+    new WOW().init();
     var userId = $('#picture-pane').attr('owner-id');
     getAlbums(userId,1);
     setPages();
@@ -93,12 +94,12 @@ function getAlbums(userId,page){
                             '</a>' +
                             '<table class="table table-striped">' +
                             '<tr>' +
-                            '<td class="text-info">相册名</td>' +
-                            '<td class="text-success">'+album.name+'</td>' +
+                            '<td>相册名</td>' +
+                            '<td>'+album.name+'</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td class="text-info">创建时间</td>' +
-                            '<td class="text-success">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>' +
+                            '<td>创建时间</td>' +
+                            '<td>'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>' +
                             '</tr>' +
                             '</table>' +
                             '<a album-id="'+album._id+'" data-toggle="modal" data-target="#config-album"' +
@@ -118,12 +119,12 @@ function getAlbums(userId,page){
                             '</a>' +
                             '<table class="table table-striped">' +
                             '<tr>' +
-                            '<td class="text-info">相册名</td>' +
-                            '<td class="text-success">'+album.name+'</td>' +
+                            '<td>相册名</td>' +
+                            '<td>'+album.name+'</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td class="text-info">创建时间</td>' +
-                            '<td class="text-success">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>' +
+                            '<td>创建时间</td>' +
+                            '<td>'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>' +
                             '</tr>' +
                             '</table>' +
                             '</div>' +

@@ -1,45 +1,45 @@
 extends ../layout/index_layout
 
 block content
-    div(id='content-pane')
-        img(id='old-img',src=params.image)
-        div(id='person-info').content-div
+        div(id='person-info',data-wow-delay='0.2s').wow.bounceInUp
+            img(id='old-img',src=params.image)
             ul
                 li
                     h1
-                        a(href='/users/'+params.user._id+'/index').text-success=params.user.name
+                        a(href='/users/'+params.user._id+'/index') #{params.user.name}
                         span 的博客
                 li
                     h4
-                        span.text-info 邮箱:
-                        span=params.user.email
+                        span 邮箱:
+                        span #{params.user.email}
                 li
                     h4
-                        span.text-info 用户名:
+                        span 用户名:
                         span=params.user.name
                 li
                     h4
-                        span.text-info 个人简介:
-                        span(style='font-size:14px;')=params.user.personInfo
-        h1 头像设置
-        div(id='div-img').content-div
-            div(id='person-img').container
-                div.imageBox
-                    div.thumbBox
-                    div.action
-                        div.new-contentarea.tc
-                            a(href='javascript:void(0)').upload-img
-                                label(for='upload-file') 上传图像
-                            form(id='form-img',enctype='multipart/form-data',method='post')
-                                input(id='upload-file',type='file',name='file')
-                        input(type='button',value='裁剪',id='btnCrop').Btnsty_peyton
-                        input(type='button',value='+',id='btnZoomIn').Btnsty_peyton
-                        input(type='button',value='-',id='btnZoomOut').Btnsty_peyton
-                div.cropped
-                div(id='div-upload-btn')
-                    button(id='upload-btn').btn.btn-default 确定
-        h1 基本信息
-        div(id='div-base').content-div
+                        span 个人简介:
+                        span=params.user.personInfo
+            div.clearfix
+        h1(data-wow-delay='0.2s').wow.bounceInUp 头像设置
+        div(id='person-img',data-wow-delay='0.2s').wow.bounceInUp
+            div.imageBox
+                div.thumbBox
+                div.action
+                    div.new-contentarea.tc
+                        a(href='javascript:void(0)').upload-img
+                            label(for='upload-file') 上传图像
+                        form(id='form-img',enctype='multipart/form-data',method='post')
+                            input(id='upload-file',type='file',name='file')
+                    input(type='button',value='裁剪',id='btnCrop').Btnsty_peyton
+                    input(type='button',value='+',id='btnZoomIn').Btnsty_peyton
+                    input(type='button',value='-',id='btnZoomOut').Btnsty_peyton
+            div.cropped
+            div.clearfix
+            div(id='div-upload-btn')
+                button(id='upload-btn').btn.btn-default 确定
+        h1(data-wow-delay='0.2s').wow.bounceInUp 基本信息
+        div(id='div-base',data-wow-delay='0.2s').content-div.wow.bounceInUp
             form.form-horizontal
                 div.form-group
                     label.col-md-3.control-label.text-info 用户名:
@@ -85,8 +85,8 @@ block content
                 div.form-group
                     div.col-md-3.col-md-offset-3
                         a(id='btn-set-base').btn.btn-primary.col-md-12 确定
-        h1 主页地址
-        div(id='div-url').text-center
+        h1(data-wow-delay='0.2s').wow.bounceInUp 主页地址
+        div(id='div-url',data-wow-delay='0.2s').text-center.wow.bounceInUp
             form.form-horizontal
                 div.form-group
                     label.col-md-3.control-label.text-info http://localhost:3000/
@@ -94,8 +94,8 @@ block content
                         input(id='text-url',type='text',value=params.user.personUrl).form-control
             br
             a(id='btn-set-url').btn.btn-primary 确定
-        h1 个人经历
-        div(id='div-experience').content-div
+        h1(data-wow-delay='0.2s').wow.bounceInUp 个人经历.wow.bounceInUp
+        div(id='div-experience').content-div.wow.bounceInUp
             form.form-horizontal
                 div.form-group
                     label.col-md-3.control-label
@@ -134,14 +134,15 @@ block content
                 div.form-group
                     div.col-md-3.col-md-offset-3
                         a(id='btn-set-experience').btn.btn-primary.col-md-12 确定
-        h1 个人简介
-        div(id='div-info')
+        h1(data-wow-delay='0.2s').wow.bounceInUp 个人简介.wow.bounceInUp
+        div(id='div-info',data-wow-delay='0.2s').wow.bounceInUp
             form
                 label
                     h3.text-success 个人简介
                 textarea(id='text-person-info').form-control #{params.user.personInfo}
             br
             a(id='btn-set-info').btn.btn-primary 确定
+
 
 
 

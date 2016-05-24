@@ -21,26 +21,37 @@ router.get('/',UserFilter.isMe,function(req,res){
     var params = {
         user:req.session.user,
         asset:{
-            css:['/stylesheets/picture-index.css'],
+            css:['/stylesheets/index.css','/stylesheets/picture-index.css'],
             js:['/javascripts/picture-index.js']
         },
+        owner:req.session.user,
         ownerId:userId,
         isMe:true
     };
     res.render('picture/index',{title:'相册',params:params});
 });
 
+
 router.get('/',function(req,res){
     var userId = getUserId(req.baseUrl);
-    var params = {
-        asset:{
-            css:['/stylesheets/picture-index.css'],
-            js:['/javascripts/picture-index.js']
-        },
-        ownerId:userId,
-        isMe:false,
-    };
-    res.render('picture/index',{title:'相册',params:params});
+    User.findOne({'_id':userId},function(err,user){
+        if(err){
+            console.log(err);
+            res.send('error');
+        }else{
+            var params = {
+                asset:{
+                    css:['/stylesheets/index.css','/stylesheets/picture-index.css'],
+                    js:['/javascripts/picture-index.js']
+                },
+                user:req.session.user,
+                owner:user,
+                ownerId:userId,
+                isMe:false,
+            };
+            res.render('picture/index',{title:'相册',params:params});
+        }
+    })
 });
 
 router.post('/getAlbums',UserFilter.isMe,function(req,res){

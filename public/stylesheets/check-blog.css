@@ -1,7 +1,3 @@
-body{
-    background: url("../images/cloud.jpg");
-}
-
 ul{
     list-style: none;
     padding:0;
@@ -12,14 +8,16 @@ a{
     color: red;
 }
 
+nav{
+    z-index: 500;
+}
 #content-pane{
-    width: 1000px;
-    margin: 0 auto 0 auto;
+    width: 80%;
+    margin: 0 auto;
 }
 
 #blog-div{
-    box-shadow: 0 0 4px #999;
-    background: #FFFFFF;
+    border:1px solid #000000;
     padding: 20px 20px 20px 20px;
 }
 

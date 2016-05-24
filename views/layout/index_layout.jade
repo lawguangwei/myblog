@@ -4,16 +4,18 @@ html
    head
       title= title
       link(rel='stylesheet',href='/bootstrap/css/bootstrap.min.css')
+      link(rel='stylesheet',href='/stylesheets/animate.css')
       -for(var i=0;i<params.asset.css.length;i++)
         link(rel='stylesheet', href=params.asset.css[i])
       script(type='text/javascript',src='/javascripts/jquery-2.2.0.min.js')
       script(type='text/javascript',src='/bootstrap/js/bootstrap.min.js')
       script(type='text/javascript',src='/javascripts/index-layout.js')
+      script(type='text/javascript',src='/javascripts/wow.min.js')
       -for(var i=0;i<params.asset.js.length;i++)
         script(type='text/javascript',src=params.asset.js[i])
    body
       div(id='content-pane')
-         nav.navbar.navbar-inverse
+         nav(data-wow-delay='0.2s').navbar.navbar-inverse.wow.bounceInDown
             div.container-fluid
                div.navbar-header
                   button(type='button',data-toggle='collapse',data-target='#navbar',aria-expanded='false').navbar-toggle.collapsed

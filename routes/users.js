@@ -65,11 +65,11 @@ router.get('/:id/index',function(req, res) {
                     }
                 }
                 var params = {
+                    user:req.session.user,
                     asset: {
                         js:['/javascripts/index.js'],
                         css:['/stylesheets/index.css']
                     },
-                    user:req.session.user,
                     image:image,
                     owner:user,
                     isMe:false

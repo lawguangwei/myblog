@@ -4,62 +4,61 @@
 extends ../layout/index_layout
 
 block content
-   h1.text-info #{params.owner.name}的博客
-   p.text-info
-      -if(params.owner.personUrl)
-         a(href='http://localhost:3000/'+params.owner.personUrl).text-info http://localhost:3000/#{params.owner.personUrl}
-   div(id='person-pane',owner-id=params.owner._id)
+   div(id='page-header',data-wow-delay='0.2s').wow.bounceInUp
+      h1 #{params.owner.name}的主页
+      p
+         -if(params.owner.personUrl)
+            a(href='http://localhost:3000/'+params.owner.personUrl)  http://localhost:3000/#{params.owner.personUrl}
+   div(id='person-pane',owner-id=params.owner._id,data-wow-delay='0.4s').wow.bounceInLeft
       img(id='person-img',alt='头像',src=params.image)
       ul(id='person-info')
          li
-            span.glyphicon.glyphicon-user
+            p.glyphicon.glyphicon-user
                span.title 姓名:&nbsp;
-                    span.text-success #{params.owner.name}
+                    p #{params.owner.name}
          li
-            span.glyphicon.glyphicon-user
+            p.glyphicon.glyphicon-user
                 span.title 性别:&nbsp;#{params.owner.gender}
          li.li-line
          li
-            span.glyphicon.glyphicon-user
+            p.glyphicon.glyphicon-user
                 span.title 生日:&nbsp;#{params.owner.birthday}
          li
-            span.glyphicon.glyphicon-heart
+            p.glyphicon.glyphicon-heart
                 span.title 婚姻:&nbsp;#{params.owner.marriage}
          li.li-line
          li
-            span.glyphicon.glyphicon-briefcase
+            p.glyphicon.glyphicon-briefcase
                span.title 工作:&nbsp;#{params.owner.experience.company}
          li
-            span.glyphicon.glyphicon-envelope
+            p.glyphicon.glyphicon-envelope
                span.title 邮箱:&nbsp;#{params.owner.email}
          li.li-line
          li
-            span.glyphicon.glyphicon-education
+            p.glyphicon.glyphicon-education
                span.title 大学:&nbsp;#{params.owner.experience.college}
          li
-            span.glyphicon.glyphicon-education
+            p.glyphicon.glyphicon-education
                span.title 中学:&nbsp;#{params.owner.experience.middle}
          li.li-line
          li
-            span.title 个人简介:&nbsp;
-               span.text-warning #{params.owner.personInfo}
-   div(id='info-pane')
-      div(id='info-nav')
-         div.li-line
-         ul
-            li
+            p.title 个人简介:&nbsp;
+            p #{params.owner.personInfo}
+   div(id='info-pane',data-wow-delay='0.4s').wow.bounceInRight
+      div(id='info-nav').row
+         ul.col-md-12.text-center
+            li.col-md-4
                a(href='/users/'+params.owner._id+'/index') 首页
-            li
+            li.col-md-4
                a(href='/users/'+params.owner._id+'/blog') 博文
-            li
+            li.col-md-4
                a(href='/users/'+params.owner._id+'/picture') 相册
-         div.li-line
-      h3 博文
+      h3.row 我的博文
       div(id='blog-pane').container-fluid
-      h3 相片
+      h3.row 我的相片
       div(id='img-pane').container-fluid
-         div.col-md-12
-             img(id='img-show',src='/images/test-img1.jpg').col-md-12
+         div
+             img(id='img-show',src='/images/test-img1.jpg')
              btn(id='last-img').btn.btn-default 上一张
              btn(id='next-img').btn.btn-default 下一张
       br

@@ -1,35 +1,52 @@
-body{
-    background: url(../images/cloud.jpg);
+/*简单reset*/
+* {
+    margin: 0;
+    padding: 0;
+}
+/*必须，关系到单个page能否全屏显示*/
+html,
+body {
+    height: 100%;
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
 
-a{
-    cursor: pointer;
-    text-decoration: none;
+nav{
+    z-index: 500;
 }
+
 #content-pane{
-    width: 1000px;
+    width: 80%;
     margin-right: auto;
     margin-left: auto;
 }
 
+#page-header{
+    padding: 40px 0 40px 0;
+}
+
+#page-header h1{
+    background: #555;
+    padding: 8px 12px;
+    font-weight: 700;
+    color: white;
+}
+
+#page-header a{
+    color:#000000;
+}
+
+
 #person-pane{
     float: left;
-    margin-top: 20px;
-    width: 200px;
-    box-shadow: 0 0 4px #000;
+    width: 25%;
+    border:2px solid #000;
     padding: 10px;
 }
 
 #person-img{
-    width: 180px;
-    border-radius: 180px;
-    border: 2px solid #fff;
-}
-
-ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    width: 100%;
+    border-radius: 100%;
+    border: 2px solid #000;
 }
 
 #person-info{
@@ -40,7 +57,7 @@ ul{
 
 #person-info li{
     margin-bottom: 8px;
-    width: 180px
+    width: 100%;
 }
 
 .li-line{
@@ -49,50 +66,105 @@ ul{
     background: #000;
 }
 
-.title{
+#person-info p.title{
     font-weight: 800;
-    width: 50px;
+}
+
+#person-info p{
+    word-break: break-all;
 }
 
 #info-pane{
     float: left;
-    width: 800px;
-    padding-left: 20px;
-    margin-top: 20px;
+    width: 75%;
+    padding: 0 25px;
 }
 
 #info-nav ul{
-    height: 30px;
+    list-style: none;
 }
 
 #info-nav ul li{
-    width: 80px;
-    height:20px;
-    margin-top: 5px;
-    float: left;
-    text-align: center;
-    border-right: 2px solid #000;
+    background: #999;
+    padding: 8px 0;
+    border-right: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.8s;
+}
+
+#info-nav ul li:hover{
+    background: #555;
+}
+
+#info-nav ul li a{
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+}
+
+#info-nav ul li a:hover{
+    text-decoration: none;
+}
+
+#info-pane h3{
+    font-weight: 700;
+    margin: 20px 0 10px 0;
+
 }
 
 #blog-pane{
-    box-shadow: 0 0 4px #000000;
-    padding:0 20px 20px 20px;
-    background: #ffffff;
+    border: 2px solid #000;
+}
+
+#blog-pane a{
+    color: white;
+    background: #555;
+    padding: 2px 8px;
+    display: inline-block;
+    transition: all 0.8s;
+}
+#blog-pane a:hover{
+    background: #999;
+    text-decoration: none;
+}
+
+#blog-pane h3{
+    font-weight: 700;
+    background: #555;
+    padding: 8px 12px;
+    color: #fff;
+    margin: 0;
+}
+
+#blog-pane h3 span{
+    display: block;
+}
+
+
+#blog-pane h3 span.text-right{
+    font-size: 8px;
 }
 
 .blog-item{
-    border-left: 2px solid #000;
+    border:1px solid #555;
+    padding: 0;
+    margin: 20px 0;
 }
-
 .blog-content{
     height: 180px;
     overflow: hidden;
+    padding: 8px;
 }
 
+
 #img-pane{
-    box-shadow: 0 0 4px #000000;
-    background: #efefef;
+    border:2px solid #000;
     padding: 20px 20px 20px 20px;
+}
+
+#img-pane img{
+   width:  100%;
 }
 
 .album{

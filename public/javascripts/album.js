@@ -4,6 +4,7 @@
 var next;
 var last;
 $(function(){
+    new WOW().init();
     getPictures(1);
     setPages();
 });

@@ -1,27 +1,31 @@
 extends ../layout/index_layout
 block content
-    div(id='content-pane')
-        div(id='info-nav')
-            div.li-line
-            ul
-                li
-                    a(href='/users/'+params.ownerId+'/index') 首页
-                li
-                    a(href='/users/'+params.ownerId+'/blog') 博文
-                li
-                    a(href='/users/'+params.ownerId+'/picture') 相册
-        div(id='catalog')
-            ul
-                li
-                    a(coll='all').a-collection 全部博文
-        div(id='blog-list',owner-id=params.ownerId)
-            label(id="coll-title").text-info 全部博文
-            table.table.table-condensed
-                tr.info
-                    td(style='width:500px') 标题
-                    td 创建时间
-                    -if(params.isMe)
-                        td
+    div(id='page-header',data-wow-delay='0.2s').wow.bounceInUp
+        h1 #{params.owner.name}的博文
+        p
+            -if(params.owner.personUrl)
+                a(href='http://localhost:3000/'+params.owner.personUrl)  http://localhost:3000/#{params.owner.personUrl}
+    div(id='info-nav',data-wow-delay='0.2s').row.wow.bounceInDown
+        ul.col-md-12.text-center
+            li.col-md-4
+                a(href='/users/'+params.ownerId+'/index') 首页
+            li.col-md-4
+                a(href='/users/'+params.ownerId+'/blog') 博文
+            li.col-md-4
+                a(href='/users/'+params.ownerId+'/picture') 相册
+    div(id='catalog',data-wow-delay='0.3s').wow.bounceInLeft
+        ul.text-center
+            li
+                a(coll='all').a-collection 全部博文
+    div(id='blog-list',owner-id=params.ownerId,data-wow-delay='0.4s').wow.bounceInRight
+        h3 全部博文
+        table.table.table-condensed
+            tr
+                td(style='width:500px') 标题
+                td 创建时间
+                -if(params.isMe)
+                    td
+        div.text-center
             ul(id='ul-pagination').pagination
 
 

@@ -4,6 +4,9 @@
 var pictures;
 var pictureIndex = 0;
 $(function(){
+
+    new WOW().init();
+
     $('.photo-album').height($('.photo-album').width());
     $('.img-album').width($('.photo-album').width()*0.95);
     $('.img-album').height($('.photo-album').height()*0.95);
@@ -38,10 +41,8 @@ function getBlog(){
             var blogs = result['blogs'];
             blogs.forEach(function(blog){
                 var date = new Date(blog.createDate);
-                var content = '<div class="col-md-12">' +
-                    '<h2 class="text-info">'+blog.title+'</h2>' +
-                    '<div class="li-line"></div>' +
-                    '<p>创建时间&nbsp;&nbsp;'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+ '</p>' +
+                var content = '<div class="col-md-12 blog-item">' +
+                    '<h3><span class="text-left">'+blog.title+'</span>'+'<span class="text-right">创建时间&nbsp;&nbsp;'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+ '</span>'+'</h3>' +
                     '<div class="blog-content">'+blog.content+'</div>' +
                     '<a href="/users/'+ownerId+'/blog/check/'+blog._id+'">'+'阅读全文</a>' +
                     '</div>';

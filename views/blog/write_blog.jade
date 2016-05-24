@@ -1,24 +1,23 @@
 extends ../layout/index_layout
 
 block content
-    div(id='content-pane')
-        h1.text-info 新建博文
-        div(id='write-pane',user-id=params.user._id)
-            h3.text-success 标题
-            input(id='title',type='text').form-control
-            h3.text-success 内容
-            script(id='container',name='content',type='text/plain') 我的博文
-            h3.text-success 分类
-                a(id='a-create-collect',style='font-size:5px',data-toggle='modal',data-target='#create-collect') 创建分类
-            select(id='collection',style='width:300px').form-control
-            label.radio-inline
-                input(type='radio',name='type',id='type-public',value='public',checked)
-                span 公开
-            label.radio-inline
-                input(type='radio',name='type',id='type-private',value='private')
-                span 私人
-            h3
-                button(id='commit-btn',style='width:200px',user-id=params.user._id).btn.btn-primary 保存
+    div(id='write-pane',user-id=params.user._id)
+        a(href='/users/'+params.user._id+'/blog') 返回
+        h3.text-success 标题
+        input(id='title',type='text').form-control
+        h3.text-success 内容
+        script(id='container',name='content',type='text/plain') 我的博文
+        h3.text-success 分类
+            a(id='a-create-collect',style='font-size:5px',data-toggle='modal',data-target='#create-collect') 创建分类
+        select(id='collection',style='width:300px').form-control
+        label.radio-inline
+            input(type='radio',name='type',id='type-public',value='public',checked)
+            span 公开
+        label.radio-inline
+            input(type='radio',name='type',id='type-private',value='private')
+            span 私人
+        h3
+            button(id='commit-btn',style='width:200px',user-id=params.user._id).btn.btn-primary 保存
 
     div(id='create-collect',tabindex='-1',role='dialog',aria-labelledby='collectLabel').modal.fade
         div(role='document').modal-dialog

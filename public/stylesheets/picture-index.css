@@ -1,3 +1,31 @@
+#picture-pane{
+    border: 1px solid #000000;
+    padding: 20px;
+    background: #ffffff;
+}
+
+.picture-item{
+    border: 2px solid #999;
+    padding: 10px 10px 0 10px;
+    background: #efefef;
+    margin-bottom: 20px;
+}
+
+#picture-pane img{
+    padding: 0;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+#picture-pane a{
+    color: #999;
+    cursor: pointer;
+}
+
+#picture-pane a:hover{
+    color: #000000;
+}
+/**
 body{
     background: url("../images/cloud.jpg");
     font-family: Arial;
@@ -16,11 +44,7 @@ a{
     margin: 0 auto 0 auto;
 }
 
-#picture-pane{
-    box-shadow: 0 0 4px #000000;
-    padding: 20px;
-    background: #ffffff;
-}
+
 
 .picture-item{
     box-shadow: 0 0 4px #000000;

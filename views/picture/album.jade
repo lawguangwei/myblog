@@ -1,10 +1,10 @@
 extends ../layout/index_layout
 block content
-    div(id='content-pane')
-        div(id='picture-pane',owner-id=params.ownerId,album-id=params.albumId).container-fluid
-            p
-                a(href='/users/'+params.ownerId+'/picture') 返回
-            br
+    div(id='picture-pane',owner-id=params.ownerId,album-id=params.albumId,data-wow-delay='0.2s').container-fluid.wow.bounceInDown
+        p
+            a(href='/users/'+params.ownerId+'/picture') 返回
+        br
+    div(data-wow-delay='0.4s').text-center.wow.bounceInUp
         ul(id='ul-pagination').pagination
 
     div(id='show-picture',tabindex='-1',role='dialog',aria-labelledby='showPicLabel').modal.fade

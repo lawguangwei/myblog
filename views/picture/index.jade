@@ -1,17 +1,22 @@
 extends ../layout/index_layout
 block content
-    div(id='content-pane')
-        div(id='info-nav')
-            div.li-line
-            ul
-                li
-                    a(href='/users/'+params.ownerId+'/index') 首页
-                li
-                    a(href='/users/'+params.ownerId+'/blog') 博文
-                li
-                    a(href='/users/'+params.ownerId+'/picture') 相册
-        div(id='picture-pane',owner-id=params.ownerId).container-fluid
+    div(id='page-header',data-wow-delay='0.2s').wow.bounceInUp
+        h1 #{params.owner.name}的相册
+        p
+            -if(params.owner.personUrl)
+                a(href='http://localhost:3000/'+params.owner.personUrl)  http://localhost:3000/#{params.owner.personUrl}
+    div(id='info-nav',data-wow-delay='0.3s').row.wow.bounceInDown
+        ul.col-md-12.text-center
+            li.col-md-4
+                a(href='/users/'+params.ownerId+'/index') 首页
+            li.col-md-4
+                a(href='/users/'+params.ownerId+'/blog') 博文
+            li.col-md-4
+                a(href='/users/'+params.ownerId+'/picture') 相册
+    div(id='picture-pane',owner-id=params.ownerId,data-wow-delay='0.4s').container-fluid.wow.bounceInUp
+    div(data-wow-delay='0.5s').text-center.wow.bounceInUp
         ul(id='ul-pagination').pagination
+
     div(id='config-album',tabindex='-1',role='dialog',aria-labelledby='configLabel').modal.fade
         div(role='document').modal-dialog
             div.modal-content

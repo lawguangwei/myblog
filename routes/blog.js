@@ -28,10 +28,11 @@ router.get('/',UserFilter.isMe,function(req, res ,next) {
                params = {
                    user:req.session.user,
                    asset:{
-                       css:['/stylesheets/blog-index.css'],
+                       css:['/stylesheets/blog-index.css','/stylesheets/index.css'],
                        js:['/javascripts/blog-index.js','/ueditor/ueditor.config.js','/ueditor/ueditor.all.js']
                    },
                    blogs:myBlogs,
+                   owner:req.session.user,
                    ownerId:req.session.user._id,
                    isMe:true
                };
@@ -40,9 +41,11 @@ router.get('/',UserFilter.isMe,function(req, res ,next) {
        }
     });
 });
+
 /*
 *不是本人
  */
+
 router.get('/',function(req, res ,next) {
     var userId = getUserId(req.baseUrl);
     User.findOne({_id:userId},function(err,user){
@@ -57,8 +60,9 @@ router.get('/',function(req, res ,next) {
                 }
                 params = {
                     user:req.session.user,
+                    owner:user,
                     asset:{
-                        css:['/stylesheets/blog-index.css'],
+                        css:['/stylesheets/blog-index.css','/stylesheets/index.css'],
                         js:['/javascripts/blog-index.js','/ueditor/ueditor.config.js','/ueditor/ueditor.all.js']
                     },
                     blogs:myBlogs,

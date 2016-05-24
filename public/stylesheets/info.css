@@ -1,12 +1,36 @@
 @charset "utf-8";
 #content-pane{
-    width: 1000px;
-    margin: 0 auto 0 auto;
+    width: 80%;
+    margin: 0 auto;
+}
+
+nav{
+    z-index: 500;
+}
+
+#old-img{
+    width: 25%;
+    border-radius: 100%;
+    border:2px solid #000;
+    float: left;
+}
+
+#person-info{
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 20px;
+}
+
+
+#person-info ul{
+    width: 75%;
+    float: left;
+    list-style: none;
 }
 
 #person-img{
-    width: 1000px;
-    box-shadow: 0 0 10px #999;
+    width: 100%;
+    border: 1px solid #000000;
     padding: 20px 20px 20px 20px;
 }
 
@@ -16,12 +40,11 @@
     height: 400px;
     width: 400px;
     border: 1px solid #aaa;
-    background: #ffffff;
     overflow: hidden;
-    background-repeat: no-repeat;
     cursor: move;
     box-shadow: 4px 4px 12px #B0B0B0;
 }
+
 .imageBox .thumbBox {
     width: 200px;
     height: 200px;
@@ -128,67 +151,26 @@ a.upload-img:hover{
     width: 100px;
 }
 
-body{
-    background: url("../images/cloud.jpg");
-}
-
-#div-img{
-    background: #ffffff;
-}
-
-#old-img{
-    width: 200px;
-    border-radius: 200px;
-    border:2px solid #FFFFFF;
-    float: left;
-    margin-top: 50px;
-}
-
-#person-info{
-    float: left;
-    height: 280px;
-    width: 760px;
-    margin-left: 40px;
-    box-shadow: 0 0 10px #999;
-    background: #ffffff;
-}
-
-ul{
-    list-style: none;
-}
-
-a{
-    cursor: pointer;
-}
-
 #div-base{
-    background: #ffffff;
-    box-shadow: 0 0 10px #999;
-    width: 1000px;
-    margin: 0 auto 0 auto;
+    border: 1px solid #000000;
+    margin: 0 auto;
     padding: 20px 20px 20px 20px;
 }
 
 #div-experience{
-    background: #ffffff;
-    box-shadow: 0 0 10px #999;
-    width: 1000px;
-    margin: 0 auto 0 auto;
+    border: 1px solid #000000;
+    margin: 0 auto;
     padding: 20px 20px 20px 20px;
 }
 
 #div-info{
-    background: #ffffff;
-    box-shadow: 0 0 10px #999;
-    width: 1000px;
-    margin: 0 auto 0 auto;
+    border: 1px solid #000000;
+    margin: 0 auto;
     padding: 20px 20px 20px 20px;
 }
 
 #div-url{
-    background: #ffffff;
-    box-shadow: 0 0 10px #999;
-    width: 1000px;
-    margin: 0 auto 0 auto;
+    border: 1px solid #000000;
+    margin: 0 auto;
     padding: 20px 20px 20px 20px;
 }

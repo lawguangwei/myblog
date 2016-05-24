@@ -1,4 +1,5 @@
 $(function(){
+    new WOW().init();
     setCollection();
     getBlogs('all',1);
     setPages('all');
@@ -118,7 +119,7 @@ function cdCollection(){
     $('.a-collection').on('click',function(){
         var collName = $(this).text();
         var collId = $(this).attr('coll');
-        $('#coll-title').text(collName);
+        $('#blog-list h3').text(collName);
         getBlogs(collId,1);
     });
 }

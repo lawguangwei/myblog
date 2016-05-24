@@ -1,24 +1,91 @@
-body{
-    background: url("../images/cloud.jpg");
-}
-
-ul{
-    list-style: none;
-    padding:0;
+#catalog{
+    width: 25%;
+    float: left;
 }
 
 #catalog ul{
-    padding: 18px 8px 18px 8px;
+    list-style: none;
+    padding: 0;
 }
 
-a{
+#catalog ul li{
+    background: #999;
+    padding: 8px 0;
+    border-bottom: 1px solid #fff;
     cursor: pointer;
 }
 
-#content-pane{
-    width: 1000px;
-    margin: 0 auto 0 auto;
+#catalog ul li:hover{
+    background: #555;
+    transition: 0.8s all;
 }
+
+#catalog ul li a{
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    display: block;
+}
+
+#catalog ul li a:hover{
+    text-decoration: none;
+}
+
+#blog-list{
+    width: 74%;
+    margin-left: 1%;
+    border:1px solid #999;
+    background: #ffffff;
+    float: left;
+}
+
+#blog-list h3{
+    margin: 0;
+    background: #999;
+    padding: 8px 12px;
+    font-weight: 700;
+    color: #fff;
+}
+
+#blog-list a{
+    color: #000000;
+    cursor: pointer;
+}
+#blog-list a:hover{
+    text-decoration: none;
+}
+
+
+
+
+/* 导航条
+#info-nav ul{
+    list-style: none;
+}
+
+#info-nav ul li{
+    background: #999;
+    padding: 8px 0;
+    border-right: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.8s;
+}
+
+#info-nav ul li:hover{
+    background: #555;
+}
+
+#info-nav ul li a{
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    display: inline-block;
+}
+
+#info-nav ul li a:hover{
+    text-decoration: none;
+}
+
 
 #catalog{
     width: 200px;
