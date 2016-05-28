@@ -32,8 +32,7 @@ function checkImg(item){
     $('#img-show').attr('src',src);
     next = item.next();
     last = item.prev();
-
-    if(next.get(0).tagName != 'DIV'){
+    if(!next.get(0)){
         $('#next-picture').hide();
     }else{
         $('#next-picture').show();

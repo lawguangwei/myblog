@@ -10,14 +10,14 @@ var UserFilter = require('../filter/UserFilter');
 
 var mongoose = require('mongoose');
 //var Grid = require('gridfs-stream');
-
-
 mongoose.connect('mongodb://localhost/law');
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'connection error:'));
 conn.once('open', function (msg) {
     console.log('mongodb connected');
 });
+
+
 
 
 router.get('/:id/index',UserFilter.isMe,function(req, res,next) {
@@ -79,6 +79,9 @@ router.get('/:id/index',function(req, res) {
         }
     });
 });
+
+
+
 
 /* GET users listing. */
 /**
@@ -186,8 +189,6 @@ router.get('/info',UserFilter.checkLogin,function(req,res,next){
         }
         res.render('user/user_info',{title:'用户信息',params:params});
     });
-
-
 });
 
 

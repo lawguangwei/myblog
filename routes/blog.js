@@ -4,6 +4,7 @@ var UserFilter = require('../filter/UserFilter');
 var Blog = require('../models/Blog');
 var User = require('../models/User');
 var Collection = require('../models/Collection');
+var xss = require('xss');
 
 function getUserId(path){
     var paths = path.split('/');
@@ -132,6 +133,7 @@ router.post('/getBlogPages',UserFilter.isMe,function(req,res){
         });
     }
 });
+
 router.post('/getBlogPages',function(req,res){
     var userId = req.body.userId;
     console.log(userId);
@@ -173,7 +175,7 @@ router.get('/write',UserFilter.checkLogin,function(req,res){
 router.post('/write',UserFilter.checkLogin,function(req,res){
     var user = req.session.user;
     var title = req.body.title;
-    var content = req.body.content;
+    var content = xss(req.body.content);
     var collection = req.body.collection;
     var type = req.body.type;
 
@@ -317,6 +319,7 @@ router.post('/getCollect',function(req,res){
 });
 
 //首页
+
 router.post('/getUserBlog',function(req,res){
     var ownerId = req.body.ownerId;
     Blog.getUserIndexBlog(ownerId,function(err,blogs){
@@ -327,4 +330,5 @@ router.post('/getUserBlog',function(req,res){
         }
     });
 });
+
 module.exports = router;

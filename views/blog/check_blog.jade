@@ -12,12 +12,12 @@ block content
                 a(href='/users/'+params.user._id+'/blog/modify/'+params.blog._id)  [编辑]
         div!=params.blog.content
 
-    div(id='div-comment')
+    div(id='div-comment',data-wow-delay='0.2s').wow.bounceInUp
         -if(params.user)
             p 留言
             textarea(id='text-comment').form-control
             br
             btn(id='submit-comment').btn.btn-primary 提交
-            div(id='comment-pane')
-            ul(id='ul-pagination').pagination
+        div(id='comment-pane')
+        ul(id='ul-pagination').pagination
     br
