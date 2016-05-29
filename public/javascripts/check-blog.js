@@ -46,7 +46,7 @@ function setComment(page){
                         '<p class="text-danger">#'+ ((commentPage-1)*10+i++) +'</p>' +
                         '<label class="text-info">'+comment.userName+'</label>' +
                         '<p class="comment-content">'+comment.content+'</p>' +
-                        '<p class="text-warning text-right">'+date.toLocaleDateString()+' '+date.toLocaleTimeString()+'</p>' +
+                        '<p class="text-warning text-right">'+date.toLocaleString()+'</p>' +
                         '</div>'
                     $('#comment-pane').append(item);
                 });

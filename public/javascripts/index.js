@@ -42,7 +42,7 @@ function getBlog(){
             blogs.forEach(function(blog){
                 var date = new Date(blog.createDate);
                 var content = '<div class="col-md-12 blog-item">' +
-                    '<h3><span class="text-left">'+blog.title+'</span>'+'<span class="text-right">创建时间&nbsp;&nbsp;'+date.toLocaleDateString()+' '+date.toLocaleTimeString()+ '</span>'+'</h3>' +
+                    '<h3><span class="text-left">'+blog.title+'</span>'+'<span class="text-right">创建时间&nbsp;&nbsp;'+date.toLocaleString()+ '</span>'+'</h3>' +
                     '<div class="blog-content">'+blog.content+'</div>' +
                     '<a href="/users/'+ownerId+'/blog/check/'+blog._id+'">'+'阅读全文</a>' +
                     '</div>';

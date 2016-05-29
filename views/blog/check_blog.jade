@@ -7,7 +7,7 @@ block content
         div.li-line
         -var date = new Date(params.blog.createDate);
         p 创建时间 :&nbsp;
-            span.text-warning #{date.toLocaleDateString()+' '+date.toLocaleTimeString()}&nbsp;
+            span.text-warning #{date.toLocaleString()}&nbsp;
             -if(params.isMe)
                 a(href='/users/'+params.user._id+'/blog/modify/'+params.blog._id)  [编辑]
         div!=params.blog.content
