@@ -114,7 +114,7 @@ router.post('/upload',UserFilter.checkLogin,multipartMiddleware,function(req,res
             extName = 'png';
             break;
     }
-    var targetPath = './public/userImage/'+user._id+'/'+user._id + Date.parse(new Date()) + file.name;
+    var targetPath = './public/userImage/'+user._id+'/'+user._id + Date.now() + file.name;
     var form = new formidable.IncomingForm();
     form.uploadDir = "./tmp";
     fs.rename(file.path,targetPath,function(err){
@@ -131,6 +131,7 @@ router.post('/upload',UserFilter.checkLogin,multipartMiddleware,function(req,res
                     path:targetPath,
                     user:user._id,
                     album:album._id,
+                    createDate:Date.now()
                 });
                 picture.save(function(err){
                     if(err){
@@ -152,7 +153,8 @@ router.post('/createAlbum',UserFilter.checkLogin,function(req,res){
     var pictureAlbum = new PictureAlbum({
         name:name,
         type:type,
-        user:user._id
+        user:user._id,
+        createDate:Date.now()
     });
     pictureAlbum.save(function(err){
         if(err){

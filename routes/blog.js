@@ -184,7 +184,8 @@ router.post('/write',UserFilter.checkLogin,function(req,res){
         writer:user._id,
         content:content,
         Collection:collection,
-        type:type
+        type:type,
+        createDate:Date.now()
     });
     blog.save(function(err){
         if(err){
@@ -297,6 +298,7 @@ router.post('/createCollect',UserFilter.checkLogin,function(req,res){
     var collection = new Collection({
         collectionName : name,
         user : req.session.user._id,
+        createDate:Date.now()
     });
     collection.save(function(err){
         if(err){

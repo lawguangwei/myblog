@@ -6,6 +6,7 @@ var User = require('../models/User');
 
 /* GET home page. */
 router.get('/',function(req,res,next){
+    console.log(Date.now());
     if(!req.session.user){
         res.redirect('/users/login');
     }else{
@@ -28,6 +29,7 @@ router.get('/:url',function(req,res){
         }
     });
 });
+
 
 router.get('/about', function(req, res) {
   res.send('About birds');
