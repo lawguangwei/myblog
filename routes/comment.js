@@ -12,7 +12,8 @@ router.post('/submit',UserFilter.checkLogin,function(req,res){
         userId:user._id,
         userName:user.name,
         blogId:blogId,
-        content:content
+        content:content,
+        createDate:Date.now()
     });
 
     comment.save(function(err){
