@@ -46,8 +46,7 @@ function setComment(page){
                         '<p class="text-danger">#'+ ((commentPage-1)*10+i++) +'</p>' +
                         '<label class="text-info">'+comment.userName+'</label>' +
                         '<p class="comment-content">'+comment.content+'</p>' +
-                        '<p class="text-warning text-right">'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'' +
-                        ' '+ date.getHours() + ':' + date.getMinutes()+':'+date.getSeconds()+'</p>' +
+                        '<p class="text-warning text-right">'+date.toLocaleDateString()+' '+date.toLocaleTimeString()+'</p>' +
                         '</div>'
                     $('#comment-pane').append(item);
                 });

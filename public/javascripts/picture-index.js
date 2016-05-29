@@ -99,7 +99,7 @@ function getAlbums(userId,page){
                             '</tr>' +
                             '<tr>' +
                             '<td>创建时间</td>' +
-                            '<td>'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>' +
+                            '<td>'+date.toLocaleDateString()+'</td>' +
                             '</tr>' +
                             '</table>' +
                             '<a album-id="'+album._id+'" data-toggle="modal" data-target="#config-album"' +
@@ -124,7 +124,7 @@ function getAlbums(userId,page){
                             '</tr>' +
                             '<tr>' +
                             '<td>创建时间</td>' +
-                            '<td>'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'</td>' +
+                            '<td>'+date.toLocaleDateString()+'</td>' +
                             '</tr>' +
                             '</table>' +
                             '</div>' +

@@ -62,14 +62,14 @@ function getBlogs(collection,page){
                         var date = new Date(blog.createDate);
                         var content = '<tr class="tr-blog">' +
                             '<td><a href="/users/'+userId+'/blog/check/'+blog._id+'">'+blog.title+'</a></td>' +
-                            '<td>'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+'</td>' +
+                            '<td>'+date.toLocaleDateString()+' '+date.toLocaleTimeString()+'</td>' +
                             '<td><a blog-id="'+blog._id+'" class="a-delete-blog">删除</a></td>' +
                             '</tr>';
                     }else{
                         var date = new Date(blog.createDate);
                         var content = '<tr class="tr-blog">' +
                             '<td><a href="/users/'+userId+'/blog/check/'+blog._id+'">'+blog.title+'</a></td>' +
-                            '<td>'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()+'</td>' +
+                            '<td>'+date.toLocaleDateString()+' '+date.toLocaleTimeString()+'</td>' +
                             '</tr>';
                     }
                     $('table').append(content);
