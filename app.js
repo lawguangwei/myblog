@@ -15,6 +15,16 @@ var comment = require('./routes/comment');
 var ueditor = require('ueditor-nodejs');
 var app = express();
 
+var mongoose = require('mongoose');
+//var Grid = require('gridfs-stream');
+mongoose.connect('mongodb://localhost/law');
+var conn = mongoose.connection;
+conn.on('error', console.error.bind(console, 'connection error:'));
+conn.once('open', function (msg) {
+    console.log('mongodb connected');
+});
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

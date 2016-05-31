@@ -8,14 +8,6 @@ var PersonImg = require('../models/PersonImg');
 var crypto = require('crypto');
 var UserFilter = require('../filter/UserFilter');
 
-var mongoose = require('mongoose');
-//var Grid = require('gridfs-stream');
-mongoose.connect('mongodb://localhost/law');
-var conn = mongoose.connection;
-conn.on('error', console.error.bind(console, 'connection error:'));
-conn.once('open', function (msg) {
-    console.log('mongodb connected');
-});
 
 
 

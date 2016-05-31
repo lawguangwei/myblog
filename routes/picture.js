@@ -214,6 +214,7 @@ router.get('/checkAlbum/:id',function(req,res){
                     css:['/stylesheets/album.css'],
                     js:['/javascripts/album.js']
                 },
+                user:req.session.user,
                 pictures:pictures,
                 albumId:albumId,
                 ownerId:userId,
